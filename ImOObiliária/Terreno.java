@@ -1,12 +1,5 @@
-
-/**
- * Escreva a descrição da classe Terreno aqui.
- * 
- * @author (seu nome) 
- * @version (número de versão ou data)
- */
 public class Terreno extends Imoveis {
-    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
+    // variáveis de instância
     private String proposito;
     private float diametroCanal;
     private int kWh;
@@ -16,20 +9,23 @@ public class Terreno extends Imoveis {
      * Construtor para objetos da classe Terreno
      */
     public Terreno() {
+        super();
         this.proposito = "n/a";
         this.diametroCanal = 0;
         this.kWh = 0;
-        this.redeEletr = true;
-        this.esgoto = true;
+        this.redeEletr = false;
+        this.esgoto = false;
     }
-    public Terreno(String p, float d, int k, boolean r, boolean e) {
-        this.proposito = p;
-        this.diametroCanal = d;
-        this.kWh = k;
-        this.redeEletr = r;
-        this.esgoto = e;
+    public Terreno(String rua, float precoPedido, float precoMin, String proposito, float diametroCanal, int kWh, boolean redeEletrica, boolean esgoto) {
+        super(rua, precoPedido, precoMin);
+        this.proposito = proposito;
+        this.diametroCanal = diametroCanal;
+        this.kWh = kWh;
+        this.redeEletr = redeEletrica;
+        this.esgoto = esgoto;
     }
     public Terreno(Terreno t) {
+        super(t);
         this.proposito = t.getProp();      
         this.diametroCanal = t.getDiam();
         this.kWh = t.getKWH();
@@ -73,28 +69,27 @@ public class Terreno extends Imoveis {
     }
     
     public Terreno clone(Terreno t) {
-        return (new Terreno(t.proposito, t.diametroCanal, t.kWh, t.redeEletr, this.esgoto));
+        return new Terreno(this);
     }
-    public boolean equals(Terreno t) {
-        return (this.proposito == t.getProp() && this.diametroCanal == t.getDiam() &&
-                this.kWh == t.getKWH() && this.redeEletr == t.getRede() && this.esgoto == t.getEsgoto());
+    
+    public boolean equals(Object obj) {
+        boolean result = super.equals(obj);
+        if (result == false) return false;
+        Terreno t = (Terreno)obj;
+        return (this.proposito.equals(t.proposito) && this.diametroCanal == t.diametroCanal &&
+                this.kWh == t.kWh && this.redeEletr == t.redeEletr && 
+                this.esgoto == t.esgoto);
     }
+    
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("Tipo de imóvel: Terreno\n");
-        s.append("Propósito da construção: ");
-        s.append(this.proposito + "\n");
-        s.append("Diâmetro do canal: ");
-        s.append(this.diametroCanal + "\n");
-        s.append("Valor de kWh máximo ");
-        s.append(this.kWh + "\n");
-        s.append("Tem rede elétrica? ");
-        if (this.getRede() == true) s.append("Sim\n");
-        else s.append("Não\n");
-        s.append("Tem acesso à rede de esgotos? ");
-        if (this.getEsgoto() == true) s.append("Sim\n");
-        else s.append("Não\n");
-        System.out.println(s);
+        s.append("Propósito da construção: "    + this.proposito + "\n");
+        s.append("Diâmetro do canal: "          + this.diametroCanal + "\n");
+        s.append("Valor de kWh máximo: "        + this.kWh + "\n");
+        if (this.getRede() == true) s.append("Rede elétrica: Sim\n");
+        else s.append("Rede elétrica: Não\n");
+        if (this.getEsgoto() == true) s.append("Acesso à rede de esgotos: Sim\n");
+        else s.append("Acesso à rede de esgotos: Não\n");
         return s.toString();
     }
 }

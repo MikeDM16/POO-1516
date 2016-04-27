@@ -3,22 +3,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Vendedor extends Atores {
-    
     // variáveis de instância
     private ArrayList<Imoveis> portfolio, historico;
     
     /**
-     * Construtor para objetos da classe Vendedor
+     * Construtores para objetos da classe Vendedor
      */
-    public Vendedor(String n, String e, String p, String m, String d) {
-        super(n,e,p,m,d);
+    public Vendedor() {
+        super();
         this.portfolio = new ArrayList<>();
         this.historico = new ArrayList<>();
     }
-    public Vendedor(Atores c){
-        super(c);
+    public Vendedor(String nome, String email, String password, String morada, String dataN) {
+        super(nome, email, password, morada, dataN, "Vendedor");
         this.portfolio = new ArrayList<>();
         this.historico = new ArrayList<>();
+    }
+    public Vendedor(Vendedor v){
+        super(v);
+        this.portfolio = copiaArrayL(v.portfolio);
+        this.historico = copiaArrayL(v.historico);
     }
     
     /**
@@ -30,15 +34,21 @@ public class Vendedor extends Atores {
     public ArrayList<Imoveis> getHist() {
         return (this.historico);
     }
-    
-    public Vendedor clone(Vendedor c) {
-        Atores novoAtor = new Atores(c.getNome(), c.getEmail(), c.getPass(), c.getMorada(), c.getDataN());
-        Vendedor novo = new Vendedor(novoAtor);
-        novo.portfolio = copiaArrayL(c.getPortf());
-        novo.historico = copiaArrayL(c.getHist());
-        return novo;
+    public String getTipo() {
+        return "Vendedor";
     }
-
+    
+    public Vendedor clone() {
+        return new Vendedor(this);
+    }
+    
+    public boolean equals (Object obj) {
+        boolean result = super.equals(obj);
+        if (result == false) return false;
+        Vendedor v = (Vendedor)obj;
+        return (this.portfolio.equals(v.portfolio) && this.historico.equals(v.historico));
+    }
+    
     /**
      * Copia ArrayList de Imóveis
      * 

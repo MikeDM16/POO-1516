@@ -7,14 +7,18 @@ public class Comprador extends Atores {
     private ArrayList<Imoveis> favoritos;
     
     /**
-     * Construtor para objetos da classe Comprador
+     * Construtores para objetos da classe Comprador
      */
-    public Comprador(String n, String e, String p, String m, String d) {
-        super(n,e,p,m,d);
+    public Comprador() {
+        super();
         this.favoritos = new ArrayList<>();
     }
-    public Comprador(Atores a) {
-        super(a);
+    public Comprador(String nome, String email, String password, String morada, String dataN) {
+        super(nome, email, password, morada, dataN, "Comprador");
+        this.favoritos = new ArrayList<>();
+    }
+    public Comprador(Comprador c) {
+        super(c);
         this.favoritos = new ArrayList<>();
     }
     
@@ -24,13 +28,21 @@ public class Comprador extends Atores {
     public ArrayList<Imoveis> getFav() {
         return this.favoritos;
     }
-    public Comprador clone(Comprador c) {
-        Atores novoAtor = new Atores(c.getNome(), c.getEmail(), c.getPass(), c.getMorada(), c.getDataN());
-        Comprador novo = new Comprador(novoAtor);
-        novo.favoritos = copiaArrayL(c.getFav());
-        return novo;
+    public String getTipo() {
+        return "Comprador";
     }
-
+    
+    public Comprador clone() {
+        return new Comprador(this);
+    }
+    
+    public boolean equals (Object obj) {
+        boolean result = super.equals(obj);
+        if (result == false) return false;
+        Comprador c = (Comprador)obj;
+        return (this.favoritos.equals(c.favoritos));
+    }
+    
     /**
      * Copia ArrayList de Imóveis
      * 

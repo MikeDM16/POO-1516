@@ -1,12 +1,8 @@
 ----------------------------------------------------------------------------
-Este é o arquivo README do projeto. Você deve descrever aqui o seu projeto.
-Informe ao usuário (alguém que não sabe nada sobre este projeto!) tudo que
-ele/ela precisa saber. Os comentários devem incluir, pelo menos:
+UNIVERSIDADE DO MINHO
+MESTRADO INTEGRADO EM ENGENHARIA INFORMÁTICA
 ------------------------------------------------------------------------
 
-TITULO DO PROJETO:
-OBJETIVO DO PROJETO:
-VERSÃO ou DATA:
-COMO INICIAR O PROJETO:
-AUTORES:
-INSTRUÇÕES PARA O USUÁRIO:
+TITULO DO PROJETO: ImOObiliária
+VERSÃO ou DATA: 2016
+AUTORES: Ana Esmeralda Fernandes, Diogo Gonçalves Machado, Miguel Dias Miranda, Rui Filipe Leite

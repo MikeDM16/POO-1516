@@ -1,21 +1,68 @@
+import java.lang.String;
 
-/**
- * Escreva a descrição da classe Imoveis aqui.
- * 
- * @author (seu nome) 
- * @version (número de versão ou data)
- */
-public class Imoveis
-{
+public class Imoveis {
     // variáveis de instância
-    private int x;
+    private String rua;
+    float precoPedido, precoMin;
 
     /**
-     * COnstrutor para objetos da classe Imoveis
+     * Construtores para objetos da classe Imoveis
      */
-    public Imoveis()
-    {
-        // inicializa variáveis de instância
-        x = 0;
+    public Imoveis() {
+        this.rua = "n/a";
+        this.precoPedido = 0;
+        this.precoMin = 0;
+    }
+    public Imoveis(String rua, float precoPedido, float precoMin) {
+        this.rua = rua;
+        this.precoPedido = precoPedido;
+        this.precoMin = precoMin;
+    }
+    public Imoveis(Imoveis i) {
+        this.rua = i.rua;
+        this.precoPedido = i.precoPedido;
+        this.precoMin = i.precoMin;
+    }
+    
+    /**
+     * Métodos de instância da classe Imoveis
+     */
+    public String getRua() {
+        return this.rua;
+    }
+    public float getPrecoPedido() {
+        return this.precoPedido;
+    }
+    public float getPrecoMin() {
+        return this.precoMin;
+    }
+    
+    public void setRua(String r) {
+        this.rua = r;
+    }
+    public void setPrecoPedido(float p) {
+        this.precoPedido = p;
+    }
+    public void setPrecoMin(float p) {
+        this.precoMin = p;
+    }
+    
+    public Imoveis clone() {
+        return new Imoveis(this);
+    }
+    
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if ((obj == null) || (this.getClass() != this.getClass())) return false;
+        Imoveis i = (Imoveis)obj;
+        return (this.rua.equals(i.rua) && this.precoPedido == i.precoPedido && 
+                this.precoMin == i.precoMin);
+    }
+    
+    public String toString(Imoveis i) {
+        StringBuilder s = new StringBuilder();
+        s.append("Rua: "            + this.getRua() + "\n");
+        s.append("Preço pedido: "   + this.getPrecoPedido() + "\n");
+        return s.toString();
     }
 }

@@ -1,108 +1,114 @@
-/**
- * Write a description of class Moradia here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Moradia extends Imoveis
-{
-    // instance variables - replace the example below with your own
-    private int tipo;
-    private double areaImplantacao;
-    private double areaTotal;
-    private double areaTerrInvol;
-    private int nQuartos;
-    private int nWC;
-    private int nPorta;
+public class Moradia extends Imoveis {
+    // variáveis de instância
+    private String tipo;
+    private double areaImplantacao, areaTotal, areaTerrEnvol;
+    private int nQuartos, nWC, nPorta;
 
     /**
-     * Constructor for objects of class Moradia
+     * Construtores para objetos da classe Moradia
      */
-    public Moradia(){
-     this(0,0.0,0.0,0.0,0,0,0);
+    public Moradia() {
+        super();
+        this.tipo = "n/a";
+        this.areaImplantacao = 0.0;
+        this.areaTotal = 0.0;
+        this.areaTerrEnvol = 0.0;
+        this.nQuartos = 0;
+        this.nWC = 0;
+        this.nPorta = 0;
     }
-    public Moradia(int t, double ai, double at, double ati, int nq, int nwc, int np){
-    tipo=t; areaImplantacao=ai; areaTotal=at; areaTerrInvol=ati; nQuartos=nq; nWC=nwc; nPorta=np;
+    public Moradia(String rua, float precoPedido, float precoMin, String tipo, double ai, double at, double ate, int nq, int nwc, int np){
+        super(rua, precoPedido, precoMin);
+        this.tipo = tipo;
+        this.areaImplantacao = ai;
+        this.areaTotal = at;
+        this.areaTerrEnvol = ate;
+        this.nQuartos = nq;
+        this.nWC = nwc;
+        this.nPorta = np;
     }
-    public Moradia(Moradia moradia){
-    tipo=moradia.getTipo();
-    areaImplantacao=moradia.getAreaImp();
-    areaTotal=moradia.getAreaT();
-    areaTerrInvol=moradia.getAreaTI();
-    nQuartos=moradia.getNQuartos();
-    nWC=moradia.getNWC();
-    nPorta=moradia.getNPorta();
-    }
-    
-    //Métodos de instância
-    
-    public int getTipo(){
-        return tipo;
-    }
-    public double getAreaImp(){
-        return areaImplantacao;
-    }
-    public double getAreaT(){
-        return areaTotal;
-    }
-    public double getAreaTI(){
-        return areaTerrInvol;
-    }
-    public int getNQuartos(){
-        return nQuartos;
-    }
-    public int getNWC(){
-        return nWC;
-    }
-    public int getNPorta(){
-        return nPorta;
+    public Moradia(Moradia m) {
+        super(m);
+        this.tipo = m.tipo;
+        this.areaImplantacao = m.areaImplantacao;
+        this.areaTotal = m.areaTotal;
+        this.areaTerrEnvol = m.areaTerrEnvol;
+        this.nQuartos = m.nQuartos;
+        this.nWC = m.nWC;
+        this.nPorta = m.nPorta;
     }
     
-    
-    public void setTipo(int t){
-        tipo=t;
+    /**
+     * Métodos de instância da classe Moradia
+     */
+    public String getTipo () {
+        return this.tipo;
     }
-    public void setAreaImp(double ai){
-        areaImplantacao=ai;
+    public double getAreaImp() {
+        return this.areaImplantacao;
     }
-    public void setAreaT(double at){
-        areaTotal=at;
+    public double getAreaT() {
+        return this.areaTotal;
     }
-    public void setAreaTI(double ati){
-       areaTerrInvol=ati;
+    public double getAreaTI() {
+        return this.areaTerrEnvol;
     }
-    public void setNQuartos(int nq){
-    nQuartos=nq;
+    public int getNQuartos() {
+        return this.nQuartos;
     }
-    public void setNWC(int nwc){
-    nWC=nwc;
+    public int getNWC() {
+        return this.nWC;
     }
-    public void setNPorta(int np){
-    nPorta=np;
+    public int getNPorta() {
+        return this.nPorta;
     }
     
     
-    
-    public Moradia clone(){
-    return new Moradia(this.getTipo(), this.getAreaImp(), this.getAreaT(), this.getAreaTI(), this.getNQuartos(), this.getNWC(), this.getNPorta());
+    public void setTipo(String t) {
+        this.tipo = t;
+    }
+    public void setAreaImp(double ai) {
+        this.areaImplantacao = ai;
+    }
+    public void setAreaT(double at) {
+        this.areaTotal = at;
+    }
+    public void setAreaTI(double ati) {
+       this.areaTerrEnvol = ati;
+    }
+    public void setNQuartos(int nq) {
+        this.nQuartos = nq;
+    }
+    public void setNWC(int nwc) {
+        this.nWC = nwc;
+    }
+    public void setNPorta(int np) {
+        this.nPorta = np;
     }
     
-    public String toString(){
-    StringBuilder s = new StringBuilder();
-    s.append("O tipo da moradia é o: "+this.tipo+".\n");
-    s.append("A sua área de implantação é "+this.areaImplantacao+" m2.\n");
-    s.append("Tem de área total coberta "+this.areaTotal+" m2.\n");
-    s.append("O terreno envolvente tem "+this.areaTerrInvol+" m2.\n");
-    s.append("Tem "+this.nQuartos+" quartos. \n");
-    s.append("Tem "+this.nWC+" WC's. \n");
-    s.append("O seu número de porta é "+this.nPorta+".\n");
-    return s.toString();
+    public Moradia clone() {
+        return new Moradia(this);
     }
     
-    public boolean equals(Moradia moradia){
-    if (moradia!=null)
-     return((this.getTipo()==moradia.getTipo()) && (this.getAreaImp()==moradia.getAreaImp()) && (this.getAreaT()==moradia.getAreaT()) && 
-     (this.getAreaTI()==moradia.getAreaTI()) && (this.getNQuartos()==moradia.getNQuartos()) && (this.getNWC()==moradia.getNWC()) && (this.getNPorta()==moradia.getNPorta()));
-    return false;
-    } 
+    public boolean equals(Object obj){
+        boolean result = super.equals(obj);
+        if (result == false) return false;
+        Moradia m = (Moradia)obj;
+        return (this.tipo.equals(m.tipo) && this.areaImplantacao == m.areaImplantacao &&
+                this.areaTotal == m.areaTotal && this.areaTerrEnvol == m.areaTerrEnvol &&
+                this.nQuartos == m.nQuartos && this.nWC == m.nWC &&
+                this.nPorta == m.nPorta);
+    }
+    
+        public String toString(){
+        StringBuilder s = new StringBuilder();
+        s.append("Tipo: "                       + this.tipo + "\n");
+        s.append("Area de implantação: "        + this.areaImplantacao + " m^2\n");
+        s.append("Área total coberta "          + this.areaTotal + " m^2\n");
+        s.append("Área do terreno envolvente "  + this.areaTerrEnvol + " m^2\n");
+        s.append("Número de quartos: "          + this.nQuartos + "\n");
+        s.append("Número de WC's: "             + this.nWC + "\n");
+        s.append("Número de porta: "            + this.nPorta + "\n");
+        return s.toString();
+    }
 }
