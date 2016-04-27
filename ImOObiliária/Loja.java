@@ -5,7 +5,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Loja
+public class Loja extends Imoveis
 {
     //Variaveis da instancia Loja
     private int numWC, numPorta;

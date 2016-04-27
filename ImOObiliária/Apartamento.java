@@ -8,7 +8,7 @@
 
 import java.lang.String;
 
-public class Apartamento {
+public class Apartamento extends Imoveis {
     // variáveis de instância
     private int numPorta,andar,quartos, wc, tipo;
     private boolean garagem;

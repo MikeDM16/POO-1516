@@ -5,7 +5,7 @@
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class Terreno {
+public class Terreno extends Imoveis {
     // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
     private String proposito;
     private float diametroCanal;

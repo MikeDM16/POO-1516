@@ -4,7 +4,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Moradia
+public class Moradia extends Imoveis
 {
     // instance variables - replace the example below with your own
     private int tipo;
