@@ -1,31 +1,35 @@
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.TreeSet;
+import java.util.Set;
 
-public class Comprador extends Atores {
+@SuppressWarnings("unchecked")
+public class Comprador extends Atores { 
+    
     // variáveis de instância
-    private ArrayList<Imoveis> favoritos;
+    private TreeSet<Imoveis> favoritos;
     
     /**
      * Construtores para objetos da classe Comprador
      */
     public Comprador() {
         super();
-        this.favoritos = new ArrayList<>();
+        this.favoritos = new TreeSet<>();
     }
     public Comprador(String nome, String email, String password, String morada, String dataN) {
         super(nome, email, password, morada, dataN, "Comprador");
-        this.favoritos = new ArrayList<>();
+        this.favoritos = new TreeSet<>();
     }
     public Comprador(Comprador c) {
         super(c);
-        this.favoritos = new ArrayList<>();
+        this.favoritos = (TreeSet<Imoveis>)c.favoritos.clone();
     }
     
     /**
      * Métodos de instância da classe Comprador
      */
-    public ArrayList<Imoveis> getFav() {
+    public TreeSet<Imoveis> getFav() {
         return this.favoritos;
     }
     public String getTipo() {
@@ -41,21 +45,5 @@ public class Comprador extends Atores {
         if (result == false) return false;
         Comprador c = (Comprador)obj;
         return (this.favoritos.equals(c.favoritos));
-    }
-    
-    /**
-     * Copia ArrayList de Imóveis
-     * 
-     * @param  a   ArrayList a copiar
-     * @return     a cópia do ArrayList
-     */
-    private static ArrayList<Imoveis> copiaArrayL(ArrayList<Imoveis> a) {
-        ArrayList<Imoveis> novo = new ArrayList<>();
-        Imoveis p = null;
-        for (Iterator<Imoveis> it = a.iterator(); it.hasNext(); ) {
-            p = it.next();
-            novo.add(p);
-        }
-        return novo;
     }
 }

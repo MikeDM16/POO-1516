@@ -2,8 +2,9 @@ import java.lang.String;
 
 public class Imoveis {
     // variáveis de instância
+    private int ref;
     private String rua;
-    float precoPedido, precoMin;
+    private float precoPedido, precoMin;
 
     /**
      * Construtores para objetos da classe Imoveis
@@ -12,16 +13,19 @@ public class Imoveis {
         this.rua = "n/a";
         this.precoPedido = 0;
         this.precoMin = 0;
+        this.ref = 0;
     }
-    public Imoveis(String rua, float precoPedido, float precoMin) {
+    public Imoveis(String rua, float precoPedido, float precoMin, int ref) {
         this.rua = rua;
         this.precoPedido = precoPedido;
         this.precoMin = precoMin;
+        this.ref = ref;
     }
     public Imoveis(Imoveis i) {
         this.rua = i.rua;
         this.precoPedido = i.precoPedido;
         this.precoMin = i.precoMin;
+        this.ref = i.ref;
     }
     
     /**

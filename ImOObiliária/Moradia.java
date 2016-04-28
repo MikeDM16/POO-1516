@@ -17,8 +17,8 @@ public class Moradia extends Imoveis {
         this.nWC = 0;
         this.nPorta = 0;
     }
-    public Moradia(String rua, float precoPedido, float precoMin, String tipo, double ai, double at, double ate, int nq, int nwc, int np){
-        super(rua, precoPedido, precoMin);
+    public Moradia(String rua, float precoPedido, float precoMin, int ref, String tipo, double ai, double at, double ate, int nq, int nwc, int np){
+        super(rua, precoPedido, precoMin, ref);
         this.tipo = tipo;
         this.areaImplantacao = ai;
         this.areaTotal = at;

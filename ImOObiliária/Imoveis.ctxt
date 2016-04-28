@@ -2,8 +2,8 @@
 comment0.params=
 comment0.target=Imoveis()
 comment0.text=\r\n\ Construtores\ para\ objetos\ da\ classe\ Imoveis\r\n
-comment1.params=rua\ precoPedido\ precoMin
-comment1.target=Imoveis(java.lang.String,\ float,\ float)
+comment1.params=rua\ precoPedido\ precoMin\ ref
+comment1.target=Imoveis(java.lang.String,\ float,\ float,\ int)
 comment10.params=obj
 comment10.target=boolean\ equals(java.lang.Object)
 comment11.params=i

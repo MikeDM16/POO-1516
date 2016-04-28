@@ -20,8 +20,8 @@ public class Apartamento extends Imoveis {
         this.wc = 0;
         this.garagem = false;
     }
-    public Apartamento(String rua, float precoPedido, float precoMin, String tipo, double area, int porta, int andar, int quartos, int wc, boolean garagem){
-        super(rua, precoPedido, precoMin);
+    public Apartamento(String rua, float precoPedido, float precoMin, int ref, String tipo, double area, int porta, int andar, int quartos, int wc, boolean garagem){
+        super(rua, precoPedido, precoMin, ref);
         this.tipo = tipo;
         this.area = area;
         this.numPorta = porta;
