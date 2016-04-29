@@ -1,38 +1,44 @@
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Vendedor extends Atores {
     // variáveis de instância
-    private ArrayList<Imoveis> portfolio, historico;
+    private Set<Integer> portfolio, historico;
     
     /**
      * Construtores para objetos da classe Vendedor
      */
     public Vendedor() {
         super();
-        this.portfolio = new ArrayList<>();
-        this.historico = new ArrayList<>();
+        this.portfolio = new TreeSet<>();
+        this.historico = new TreeSet<>();
     }
     public Vendedor(String nome, String email, String password, String morada, String dataN) {
         super(nome, email, password, morada, dataN, "Vendedor");
-        this.portfolio = new ArrayList<>();
-        this.historico = new ArrayList<>();
+        this.portfolio = new TreeSet<>();
+        this.historico = new TreeSet<>();
     }
     public Vendedor(Vendedor v){
         super(v);
-        this.portfolio = copiaArrayL(v.portfolio);
-        this.historico = copiaArrayL(v.historico);
+        this.portfolio = v.getPortf();
+        this.historico = v.getHist();
     }
     
     /**
      * Métodos de instância da classe Vendedor
      */
-    public ArrayList<Imoveis> getPortf() {
-        return (this.portfolio);
+    public Set<Integer> getPortf() {
+        Set<Integer> copia = new TreeSet<>();
+        for (int i: this.portfolio) copia.add(i);
+        return copia;
     }
-    public ArrayList<Imoveis> getHist() {
-        return (this.historico);
+    public Set<Integer> getHist() {
+        Set<Integer> copia = new TreeSet<>();
+        for (int i: this.historico) copia.add(i);
+        return copia;
     }
     public String getTipo() {
         return "Vendedor";
@@ -47,21 +53,5 @@ public class Vendedor extends Atores {
         if (result == false) return false;
         Vendedor v = (Vendedor)obj;
         return (this.portfolio.equals(v.portfolio) && this.historico.equals(v.historico));
-    }
-    
-    /**
-     * Copia ArrayList de Imóveis
-     * 
-     * @param  a   ArrayList a copiar
-     * @return     a cópia do ArrayList
-     */
-    private static ArrayList<Imoveis> copiaArrayL(ArrayList<Imoveis> a) {
-        ArrayList<Imoveis> novo = new ArrayList<>();
-        Imoveis p = null;
-        for (Iterator<Imoveis> it = a.iterator(); it.hasNext(); ) {
-            p = it.next();
-            novo.add(p);
-        }
-        return novo;
     }
 }

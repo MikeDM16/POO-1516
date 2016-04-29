@@ -1,7 +1,7 @@
 import java.lang.String;
 import java.util.ArrayList;
 
-public class Atores {
+public abstract class Atores {
     // variáveis de instância
     private String nome, email, password, morada, dataN, tipo;
 
@@ -69,10 +69,6 @@ public class Atores {
     }
     public void setTipo(String t) {
         this.tipo = t;
-    }
-    
-    public Atores clone() {
-        return new Atores(this.nome, this.email, this.password, this.morada, this.dataN, this.tipo);
     }
     
     public boolean equals(Object obj) {

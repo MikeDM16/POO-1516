@@ -1,14 +1,14 @@
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
 import java.util.Set;
+import java.util.TreeSet;
 
-@SuppressWarnings("unchecked")
+
 public class Comprador extends Atores { 
     
     // variáveis de instância
-    private TreeSet<Imoveis> favoritos;
+    private Set<Integer> favoritos;
     
     /**
      * Construtores para objetos da classe Comprador
@@ -23,14 +23,16 @@ public class Comprador extends Atores {
     }
     public Comprador(Comprador c) {
         super(c);
-        this.favoritos = (TreeSet<Imoveis>)c.favoritos.clone();
+        this.favoritos = c.getFavoritos();
     }
     
     /**
      * Métodos de instância da classe Comprador
      */
-    public TreeSet<Imoveis> getFav() {
-        return this.favoritos;
+    public Set<Integer> getFavoritos() {
+        Set<Integer> copia = new TreeSet<>();
+        for (int i: this.favoritos) copia.add(i);
+        return copia;
     }
     public String getTipo() {
         return "Comprador";

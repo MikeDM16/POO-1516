@@ -1,6 +1,6 @@
 import java.lang.String;
 
-public class Imoveis {
+public abstract class Imoveis {
     // variáveis de instância
     private int ref;
     private String rua;
@@ -49,10 +49,6 @@ public class Imoveis {
     }
     public void setPrecoMin(float p) {
         this.precoMin = p;
-    }
-    
-    public Imoveis clone() {
-        return new Imoveis(this);
     }
     
     public boolean equals(Object obj) {
