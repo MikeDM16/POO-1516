@@ -2,8 +2,11 @@
 comment0.params=
 comment0.target=Imoobiliaria()
 comment0.text=\r\n\ Construtores\ para\ objetos\ da\ classe\ Imoobiliaria\r\n
-comment1.params=
-comment1.target=void\ initApp()
+comment1.params=utilizador
+comment1.target=boolean\ existeUtilizador(Utilizador)
+comment1.text=\r\n\ M\u00E9todos\ de\ inst\u00E2ncia\ da\ classe\ Imoobiliaria\r\n
 comment2.params=utilizador
 comment2.target=void\ registarUtilizador(Utilizador)
-numComments=3
+comment3.params=
+comment3.target=void\ initApp()
+numComments=4

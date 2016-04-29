@@ -1,5 +1,6 @@
 import java.lang.String;
 import java.util.ArrayList;
+import Exceptions.*;
 
 public abstract class Utilizador {
     // variáveis de instância
@@ -33,6 +34,9 @@ public abstract class Utilizador {
         this.tipo = a.tipo;
     }
     
+    /**
+     * Métodos de instância da classe Utilizador
+     */
     public String getNome() {
         return this.nome;
     }
@@ -71,6 +75,11 @@ public abstract class Utilizador {
         this.tipo = t;
     }
     
+    public void registarUtilizador(Utilizador utilizador) throws UtilizadorExistenteException {
+        if (Imoobiliaria.existeUtilizador(utilizador)) throw new UtilizadorExistenteException();
+        else this.utilizadores.put(utilizador.getEmail(), utilizador);
+    }
+       
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if ((obj == null) || (this.getClass() != this.getClass())) return false;
@@ -89,5 +98,4 @@ public abstract class Utilizador {
         s.append("Estatuto do ator: "     + this.getTipo() + "\n");
         return s.toString();
     }
-      
 }

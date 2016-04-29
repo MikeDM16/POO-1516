@@ -22,6 +22,7 @@ comment2.params=a
 comment2.target=Utilizador(Utilizador)
 comment3.params=
 comment3.target=java.lang.String\ getNome()
+comment3.text=\r\n\ M\u00E9todos\ de\ inst\u00E2ncia\ da\ classe\ Utilizador\r\n
 comment4.params=
 comment4.target=java.lang.String\ getEmail()
 comment5.params=
