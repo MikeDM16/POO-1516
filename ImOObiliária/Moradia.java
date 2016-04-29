@@ -1,4 +1,4 @@
-public class Moradia extends Imoveis {
+public class Moradia extends Imovel {
     // variáveis de instância
     private String tipo;
     private double areaImplantacao, areaTotal, areaTerrEnvol;

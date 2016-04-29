@@ -1,9 +1,9 @@
 #BlueJ class context
 comment0.params=
-comment0.target=Atores()
-comment0.text=\r\n\ Construtor\ para\ objetos\ da\ classe\ Atores\r\n
+comment0.target=Utilizador()
+comment0.text=\r\n\ Construtor\ para\ objetos\ da\ classe\ Utilizador\r\n
 comment1.params=nome\ email\ password\ morada\ dataN\ tipo
-comment1.target=Atores(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment1.target=Utilizador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
 comment10.params=e
 comment10.target=void\ setEmail(java.lang.String)
 comment11.params=p
@@ -17,9 +17,9 @@ comment14.target=void\ setTipo(java.lang.String)
 comment15.params=obj
 comment15.target=boolean\ equals(java.lang.Object)
 comment16.params=a
-comment16.target=java.lang.String\ toString(Atores)
+comment16.target=java.lang.String\ toString(Utilizador)
 comment2.params=a
-comment2.target=Atores(Atores)
+comment2.target=Utilizador(Utilizador)
 comment3.params=
 comment3.target=java.lang.String\ getNome()
 comment4.params=

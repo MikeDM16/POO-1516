@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-public class Comprador extends Atores { 
+public class Comprador extends Utilizador { 
     
     // variáveis de instância
     private Set<Integer> favoritos;

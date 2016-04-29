@@ -1,4 +1,4 @@
-public class Loja extends Imoveis {
+public class Loja extends Imovel {
     // Variaveis da instancia
     private int numPorta;
     private double area;

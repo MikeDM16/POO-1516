@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.params=
-comment0.target=Imoveis()
-comment0.text=\r\n\ Construtores\ para\ objetos\ da\ classe\ Imoveis\r\n
+comment0.target=Imovel()
+comment0.text=\r\n\ Construtores\ para\ objetos\ da\ classe\ Imovel\r\n
 comment1.params=rua\ precoPedido\ precoMin\ ref
-comment1.target=Imoveis(java.lang.String,\ float,\ float,\ int)
+comment1.target=Imovel(java.lang.String,\ float,\ float,\ int)
 comment10.params=i
-comment10.target=java.lang.String\ toString(Imoveis)
+comment10.target=java.lang.String\ toString(Imovel)
 comment2.params=i
-comment2.target=Imoveis(Imoveis)
+comment2.target=Imovel(Imovel)
 comment3.params=
 comment3.target=java.lang.String\ getRua()
-comment3.text=\r\n\ M\u00E9todos\ de\ inst\u00E2ncia\ da\ classe\ Imoveis\r\n
+comment3.text=\r\n\ M\u00E9todos\ de\ inst\u00E2ncia\ da\ classe\ Imovel\r\n
 comment4.params=
 comment4.target=float\ getPrecoPedido()
 comment5.params=

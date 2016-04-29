@@ -1,14 +1,14 @@
 import java.lang.String;
 import java.util.ArrayList;
 
-public abstract class Atores {
+public abstract class Utilizador {
     // variáveis de instância
     private String nome, email, password, morada, dataN, tipo;
 
     /**
-     * Construtor para objetos da classe Atores
+     * Construtor para objetos da classe Utilizador
      */
-    public Atores() {
+    public Utilizador() {
         this.nome = "n/a";
         this.email = "n/a";
         this.password = "n/a";
@@ -16,7 +16,7 @@ public abstract class Atores {
         this.dataN = "n/a";
         this.tipo = "n/a";
     }
-    public Atores(String nome, String email, String password, String morada, String dataN, String tipo) {
+    public Utilizador(String nome, String email, String password, String morada, String dataN, String tipo) {
         this.nome = nome;
         this.email = email;
         this.password = password;
@@ -24,7 +24,7 @@ public abstract class Atores {
         this.dataN = dataN;
         this.tipo = tipo;
     }
-    public Atores(Atores a) {
+    public Utilizador(Utilizador a) {
         this.nome = a.nome;
         this.email = a.email;
         this.password = a.password;
@@ -74,13 +74,13 @@ public abstract class Atores {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if ((obj == null) || (this.getClass() != this.getClass())) return false;
-        Atores a = (Atores)obj;
+        Utilizador a = (Utilizador)obj;
         return (this.nome.equals(a.nome) && this.email.equals(a.email) &&
                 this.password.equals(a.password) && this.morada.equals(a.morada) &&
                 this.dataN.equals(a.dataN) && this.tipo.equals(a.tipo));
     }
     
-    public String toString(Atores a) {
+    public String toString(Utilizador a) {
         StringBuilder s = new StringBuilder();
         s.append("Nome: "                 + this.getNome() + "\n");
         s.append("Email: "                + this.getEmail() + "\n");

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Vendedor extends Atores {
+public class Vendedor extends Utilizador {
     // variáveis de instância
     private Set<Integer> portfolio, historico;
     

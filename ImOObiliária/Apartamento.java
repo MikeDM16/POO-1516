@@ -1,6 +1,6 @@
 import java.lang.String;
 
-public class Apartamento extends Imoveis {
+public class Apartamento extends Imovel {
     // variáveis de instância
     private String tipo;
     private double area;

@@ -1,4 +1,4 @@
-public class Terreno extends Imoveis {
+public class Terreno extends Imovel {
     // variáveis de instância
     private String proposito;
     private float diametroCanal;
