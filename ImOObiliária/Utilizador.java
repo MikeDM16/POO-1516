@@ -1,6 +1,5 @@
 import java.lang.String;
 import java.util.ArrayList;
-import Exceptions.*;
 
 public abstract class Utilizador {
     // variáveis de instância
@@ -73,11 +72,6 @@ public abstract class Utilizador {
     }
     public void setTipo(String t) {
         this.tipo = t;
-    }
-    
-    public void registarUtilizador(Utilizador utilizador) throws UtilizadorExistenteException {
-        if (Imoobiliaria.existeUtilizador(utilizador)) throw new UtilizadorExistenteException();
-        else this.utilizadores.put(utilizador.getEmail(), utilizador);
     }
        
     public boolean equals(Object obj) {
