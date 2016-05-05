@@ -16,7 +16,7 @@ public class Terreno extends Imovel {
         this.redeEletr = false;
         this.esgoto = false;
     }
-    public Terreno(String rua, float precoPedido, float precoMin, int ref, String proposito, float diametroCanal, int kWh, boolean redeEletrica, boolean esgoto) {
+    public Terreno(String rua, float precoPedido, float precoMin, String ref, String proposito, float diametroCanal, int kWh, boolean redeEletrica, boolean esgoto) {
         super(rua, precoPedido, precoMin, ref);
         this.proposito = proposito;
         this.diametroCanal = diametroCanal;

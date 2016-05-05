@@ -2,9 +2,10 @@ import java.lang.String;
 
 public abstract class Imovel {
     // variáveis de instância
-    private int ref;
+    private String ref;
     private String rua;
     private float precoPedido, precoMin;
+    private int consultas;
 
     /**
      * Construtores para objetos da classe Imovel
@@ -13,19 +14,22 @@ public abstract class Imovel {
         this.rua = "n/a";
         this.precoPedido = 0;
         this.precoMin = 0;
-        this.ref = 0;
+        this.ref = "n/a";
+        this.consultas = 0;
     }
-    public Imovel(String rua, float precoPedido, float precoMin, int ref) {
+    public Imovel(String rua, float precoPedido, float precoMin, String ref) {
         this.rua = rua;
         this.precoPedido = precoPedido;
         this.precoMin = precoMin;
         this.ref = ref;
+        this.consultas = 0;
     }
     public Imovel(Imovel i) {
         this.rua = i.rua;
         this.precoPedido = i.precoPedido;
         this.precoMin = i.precoMin;
         this.ref = i.ref;
+        this.consultas = i.consultas;
     }
     
     /**
@@ -40,6 +44,12 @@ public abstract class Imovel {
     public float getPrecoMin() {
         return this.precoMin;
     }
+    public String getReferencia() {
+        return this.ref;
+    }
+    public int getConsultas() {
+        return this.consultas;
+    }
     
     public void setRua(String r) {
         this.rua = r;
@@ -49,6 +59,9 @@ public abstract class Imovel {
     }
     public void setPrecoMin(float p) {
         this.precoMin = p;
+    }
+    public void addConsulta() {
+        this.consultas++;
     }
     
     public boolean equals(Object obj) {

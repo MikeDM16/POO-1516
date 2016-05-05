@@ -17,7 +17,7 @@ public class Moradia extends Imovel {
         this.nWC = 0;
         this.nPorta = 0;
     }
-    public Moradia(String rua, float precoPedido, float precoMin, int ref, String tipo, double ai, double at, double ate, int nq, int nwc, int np){
+    public Moradia(String rua, float precoPedido, float precoMin, String ref, String tipo, double ai, double at, double ate, int nq, int nwc, int np){
         super(rua, precoPedido, precoMin, ref);
         this.tipo = tipo;
         this.areaImplantacao = ai;
@@ -62,7 +62,6 @@ public class Moradia extends Imovel {
     public int getNPorta() {
         return this.nPorta;
     }
-    
     
     public void setTipo(String t) {
         this.tipo = t;

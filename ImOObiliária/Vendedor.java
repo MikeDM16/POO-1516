@@ -1,12 +1,14 @@
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Vendedor extends Utilizador {
     // variáveis de instância
-    private Set<Integer> portfolio, historico;
+    private Set<String> portfolio, historico;
+    private static List<Consulta> consultas;
     
     /**
      * Construtores para objetos da classe Vendedor
@@ -30,18 +32,28 @@ public class Vendedor extends Utilizador {
     /**
      * Métodos de instância da classe Vendedor
      */
-    public Set<Integer> getPortf() {
-        Set<Integer> copia = new TreeSet<>();
-        for (int i: this.portfolio) copia.add(i);
+    public Set<String> getPortf() {
+        Set<String> copia = new TreeSet<>();
+        for (String r: this.portfolio) copia.add(r);
         return copia;
     }
-    public Set<Integer> getHist() {
-        Set<Integer> copia = new TreeSet<>();
-        for (int i: this.historico) copia.add(i);
+    public Set<String> getHist() {
+        Set<String> copia = new TreeSet<>();
+        for (String r: this.historico) copia.add(r);
         return copia;
     }
-    public String getTipo() {
-        return "Vendedor";
+    
+    public void adicionaImovelVenda(String ref) {
+        this.portfolio.add(ref);
+    }
+    
+    public static void adicionaConsulta(String ref) {
+        Consulta nova = new Consulta(ref);
+        consultas.add(nova);
+    }
+    public static void adicionaConsulta(String email, String ref) {
+        Consulta nova = new Consulta(email, ref);
+        consultas.add(nova);
     }
     
     public Vendedor clone() {

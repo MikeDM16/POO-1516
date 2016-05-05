@@ -3,12 +3,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-
+import Exceptions.*;
 
 public class Comprador extends Utilizador { 
-    
     // variáveis de instância
-    private Set<Integer> favoritos;
+    private static Set<String> favoritos;
     
     /**
      * Construtores para objetos da classe Comprador
@@ -29,13 +28,16 @@ public class Comprador extends Utilizador {
     /**
      * Métodos de instância da classe Comprador
      */
-    public Set<Integer> getFavoritos() {
-        Set<Integer> copia = new TreeSet<>();
-        for (int i: this.favoritos) copia.add(i);
+    public Set<String> getFavoritos() {
+        Set<String> copia = new TreeSet<>();
+        for (String r: this.favoritos) copia.add(r);
         return copia;
     }
-    public String getTipo() {
-        return "Comprador";
+    
+    public static void setFavorito(String idImovel) throws ImovelInexistenteException, SemAutorizacaoException {
+        if (!Imoobiliaria.existeImovel(idImovel)) throw new ImovelInexistenteException();
+        if (!ImoobiliariaAPP.getAtualUser().getClass().getName().equals("Comprador")) throw new SemAutorizacaoException();
+        favoritos.add(idImovel);
     }
     
     public Comprador clone() {

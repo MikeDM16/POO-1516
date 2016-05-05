@@ -17,7 +17,7 @@ public class Loja extends Imovel {
         this.wc = false;
         this.parteHabitacional = false;
     }
-    public Loja(String rua, float precoPedido, float precoMin, int ref, boolean wc, int numPorta, double area, String tipoNegocio, boolean parteHabitacional, Apartamento p){
+    public Loja(String rua, float precoPedido, float precoMin, String ref, boolean wc, int numPorta, double area, String tipoNegocio, boolean parteHabitacional, Apartamento p) {
         super(rua, precoPedido, precoMin, ref);
         this.wc = wc;
         this.numPorta = numPorta;
