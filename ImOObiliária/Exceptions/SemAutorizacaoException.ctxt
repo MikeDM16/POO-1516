@@ -5,5 +5,5 @@ comment0.text=\r\n\ Construtores\r\n
 comment1.params=mensagem
 comment1.target=SemAutorizacaoException(java.lang.String)
 comment2.params=
-comment2.target=java.lang.String\ SemAutorizacaoException()
+comment2.target=java.lang.String\ getMensagem()
 numComments=3

@@ -32,10 +32,8 @@ public class Imoobiliaria {
         return (this.utilizadores.containsKey(utilizador.getEmail()));
     }
    
-    public void registarUtilizador(Utilizador utilizador) throws UtilizadorExistenteException {
+    public void registarUtilizador (Utilizador utilizador) throws UtilizadorExistenteException {
         if (existeUtilizador(utilizador)) throw new UtilizadorExistenteException();
-        else this.utilizadores.put(utilizador.getEmail(), utilizador);
+        this.utilizadores.put(utilizador.getEmail(), utilizador);
     }
-    
-    
 }

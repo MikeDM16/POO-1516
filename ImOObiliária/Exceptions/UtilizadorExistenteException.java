@@ -11,6 +11,6 @@ public class UtilizadorExistenteException extends Exception {
         super(mensagem);
     }
     public String getMensagem() {
-        return "Esse utilizador já existe!\n";
+        return "Este utilizador já existe!\n";
     }
 }

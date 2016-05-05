@@ -17,7 +17,7 @@ public class Vendedor extends Utilizador {
         this.historico = new TreeSet<>();
     }
     public Vendedor(String nome, String email, String password, String morada, String dataN) {
-        super(nome, email, password, morada, dataN, "Vendedor");
+        super(nome, email, password, morada, dataN);
         this.portfolio = new TreeSet<>();
         this.historico = new TreeSet<>();
     }

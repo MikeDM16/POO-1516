@@ -1,18 +1,18 @@
 #BlueJ package file
 objectbench.height=76
-objectbench.width=668
-package.editor.height=400
-package.editor.width=560
+objectbench.width=661
+package.editor.height=562
+package.editor.width=553
 package.editor.x=12
 package.editor.y=12
 package.numDependencies=0
 package.numTargets=2
 package.showExtends=true
 package.showUses=true
-target1.editor.height=700
-target1.editor.width=900
-target1.editor.x=52
-target1.editor.y=32
+target1.editor.height=735
+target1.editor.width=697
+target1.editor.x=676
+target1.editor.y=0
 target1.height=50
 target1.name=SemAutorizacaoException
 target1.naviview.expanded=false

@@ -10,7 +10,7 @@ public class SemAutorizacaoException extends Exception {
     public SemAutorizacaoException(String mensagem){
         super(mensagem);
     }
-    public String SemAutorizacaoException() {
+    public String getMensagem() {
         return "Não tem autorização para inicar sessão!\n";
     }
 }

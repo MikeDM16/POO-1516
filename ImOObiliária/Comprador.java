@@ -18,7 +18,7 @@ public class Comprador extends Utilizador {
         this.favoritos = new TreeSet<>();
     }
     public Comprador(String nome, String email, String password, String morada, String dataN) {
-        super(nome, email, password, morada, dataN, "Comprador");
+        super(nome, email, password, morada, dataN);
         this.favoritos = new TreeSet<>();
     }
     public Comprador(Comprador c) {
