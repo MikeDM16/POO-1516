@@ -5,10 +5,12 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import Exceptions.*;
+
 public class Vendedor extends Utilizador {
     // variáveis de instância
     private Set<String> portfolio, historico;
-    private static List<Consulta> consultas;
+    private List<Consulta> consultas;
     
     /**
      * Construtores para objetos da classe Vendedor
@@ -17,16 +19,19 @@ public class Vendedor extends Utilizador {
         super();
         this.portfolio = new TreeSet<>();
         this.historico = new TreeSet<>();
+        this.consultas = new ArrayList<>();
     }
     public Vendedor(String nome, String email, String password, String morada, String dataN) {
         super(nome, email, password, morada, dataN);
         this.portfolio = new TreeSet<>();
         this.historico = new TreeSet<>();
+        this.consultas = new ArrayList<>();
     }
-    public Vendedor(Vendedor v){
+    public Vendedor(Vendedor v) {
         super(v);
         this.portfolio = v.getPortf();
         this.historico = v.getHist();
+        this.consultas = v.getConsulta();
     }
     
     /**
@@ -42,18 +47,41 @@ public class Vendedor extends Utilizador {
         for (String r: this.historico) copia.add(r);
         return copia;
     }
+    public List<Consulta> getConsulta() {
+        List<Consulta> copia = new ArrayList<>();
+        for (Consulta i: this.consultas) copia.add(i);
+        return copia;
+    }
+    
+    public void imprimeImoveis() {
+        for (String i: this.portfolio) {
+            System.out.println(i);
+        }
+    }
+    
+    public void imprimeConsultas() {
+        for (Consulta i: this.consultas) {
+            System.out.println(i.toString());
+        }
+    }
+    
+    public List<Consulta> getConsultas() throws SemAutorizacaoException {
+        List<Consulta> copia = new ArrayList<>();
+        for (Consulta i: this.consultas) copia.add(i);
+        return copia;
+    }
     
     public void adicionaImovelVenda(String ref) {
         this.portfolio.add(ref);
     }
     
-    public static void adicionaConsulta(String ref) {
+    public void adicionaConsulta(String ref) {
         Consulta nova = new Consulta(ref);
-        consultas.add(nova);
+        this.consultas.add(nova);
     }
-    public static void adicionaConsulta(String email, String ref) {
+    public void adicionaConsulta(String email, String ref) {
         Consulta nova = new Consulta(email, ref);
-        consultas.add(nova);
+        this.consultas.add(nova);
     }
     
     public Vendedor clone() {

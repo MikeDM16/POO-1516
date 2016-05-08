@@ -3,8 +3,7 @@ public class Loja extends Imovel {
     private int numPorta;
     private double area;
     private String tipoNeg;
-    private boolean wc, parteHabitacional;
-    private Apartamento p;
+    private boolean wc;
     
     /**
      * Construtores para objetos da classe Loja
@@ -15,23 +14,23 @@ public class Loja extends Imovel {
         this.area = 0.0;
         this.tipoNeg = "n/a";
         this.wc = false;
-        this.parteHabitacional = false;
+        this.setReferencia("n/a");
     }
-    public Loja(String rua, float precoPedido, float precoMin, String ref, boolean wc, int numPorta, double area, String tipoNegocio, boolean parteHabitacional, Apartamento p) {
-        super(rua, precoPedido, precoMin, ref);
+    public Loja(String rua, float precoPedido, float precoMin, boolean wc, int numPorta, double area, String tipoNegocio) {
+        super(rua, precoPedido, precoMin);
         this.wc = wc;
         this.numPorta = numPorta;
+        this.area = area;
         this.tipoNeg = tipoNegocio;
-        this.parteHabitacional = parteHabitacional;
-        this.p = p;
+        this.geraReferencia(Imoobiliaria.getCount());
     }
     public Loja(Loja l){ 
         super(l);
         this.wc = l.wc;
         this.numPorta = l.numPorta;
+        this.area = l.area;
         this.tipoNeg = l.tipoNeg;
-        this.parteHabitacional = l.parteHabitacional;
-        this.p = l.p;
+        this.setReferencia(l.getReferencia());
     }
     
     /**
@@ -49,12 +48,6 @@ public class Loja extends Imovel {
     public String getTNeg() {
         return this.tipoNeg;
     }
-    public boolean getPartHab() {
-        return this.parteHabitacional;
-    }
-    public Apartamento getApart() {
-        return this.p;
-    }
     
     public void setWC(boolean n) {
         this.wc = n;
@@ -68,12 +61,6 @@ public class Loja extends Imovel {
     public void setTNeg(String s) {
         this.tipoNeg = s;
     }
-    public void setPartHab(boolean b) {
-        this.parteHabitacional = b ;
-    }
-    public void setApart(Apartamento p) {
-        this.p = p;
-    }
     
     public Loja clone() {
         return new Loja(this);
@@ -84,22 +71,21 @@ public class Loja extends Imovel {
         if (result == false) return false;
         Loja l = (Loja)obj;
         return (this.numPorta == l.numPorta && this.area == l.area &&
-                this.tipoNeg.equals(l.tipoNeg) && this.wc == l.wc &&
-                this.parteHabitacional == l.parteHabitacional &&
-                this.p.equals(l.p));
+                this.tipoNeg.equals(l.tipoNeg) && this.wc == l.wc);
         
     }
     
     public String toString() {
         StringBuilder s = new StringBuilder();
+        s.append("Estado: "             + this.getEstado() + "\n");
+        s.append("Rua: "                + this.getRua() + "\n");
+        s.append("Preço pedido: "       + this.getPrecoPedido() + "\n");
         s.append("Área : "              + this.area + " m^2\n");
         s.append("Tipo de negócio: "    + this.tipoNeg + "\n");
         s.append("Número de porta: "    + this.numPorta + "\n");
-        s.append("Tipo de negócio: "+ this.tipoNeg + "\n");
+        s.append("Tipo de negócio: "    + this.tipoNeg + "\n");
         if (this.wc == true) s.append ("WC: Sim\n");
         else s.append ("WC: Não\n");
-        if (this.parteHabitacional == true) s.append ("Parte Habitacional: Sim\n");
-        else s.append ("Parte Habitacional: Não\n");
         return s.toString();
     }
 }

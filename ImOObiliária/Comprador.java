@@ -7,7 +7,7 @@ import Exceptions.*;
 
 public class Comprador extends Utilizador { 
     // variáveis de instância
-    private static Set<String> favoritos;
+    private Set<String> favoritos;
     
     /**
      * Construtores para objetos da classe Comprador
@@ -34,7 +34,7 @@ public class Comprador extends Utilizador {
         return copia;
     }
     
-    public static void setFavorito(String idImovel) throws ImovelInexistenteException, SemAutorizacaoException {
+    public void setFavorito(String idImovel) throws ImovelInexistenteException, SemAutorizacaoException {
         if (!Imoobiliaria.existeImovel(idImovel)) throw new ImovelInexistenteException();
         if (!ImoobiliariaAPP.getAtualUser().getClass().getName().equals("Comprador")) throw new SemAutorizacaoException();
         favoritos.add(idImovel);

@@ -2,7 +2,7 @@ public class Terreno extends Imovel {
     // variáveis de instância
     private String proposito;
     private float diametroCanal;
-    private int kWh;
+    private int kWh, lote;
     private boolean redeEletr, esgoto;
 
     /**
@@ -15,14 +15,18 @@ public class Terreno extends Imovel {
         this.kWh = 0;
         this.redeEletr = false;
         this.esgoto = false;
+        this.lote = 0;
+        this.setReferencia("n/a");
     }
-    public Terreno(String rua, float precoPedido, float precoMin, String ref, String proposito, float diametroCanal, int kWh, boolean redeEletrica, boolean esgoto) {
-        super(rua, precoPedido, precoMin, ref);
+    public Terreno(String rua, float precoPedido, float precoMin, String proposito, float diametroCanal, int kWh, boolean redeEletrica, boolean esgoto, int lote) {
+        super(rua, precoPedido, precoMin);
         this.proposito = proposito;
         this.diametroCanal = diametroCanal;
         this.kWh = kWh;
         this.redeEletr = redeEletrica;
         this.esgoto = esgoto;
+        this.lote = lote;
+        this.geraReferencia(Imoobiliaria.getCount());
     }
     public Terreno(Terreno t) {
         super(t);
@@ -31,6 +35,8 @@ public class Terreno extends Imovel {
         this.kWh = t.getKWH();
         this.redeEletr = t.getRede();
         this.esgoto = t.getEsgoto();
+        this.lote = t.lote;
+        this.setReferencia(t.getReferencia());
     }
     
     /**
@@ -51,6 +57,9 @@ public class Terreno extends Imovel {
     public boolean getEsgoto() {
         return this.esgoto;
     }
+    public int getLote() {
+        return this.lote;
+    }
     
     public void setProp(String s) {
         this.proposito = s;
@@ -68,7 +77,7 @@ public class Terreno extends Imovel {
         this.esgoto = e;
     }
     
-    public Terreno clone(Terreno t) {
+    public Terreno clone() {
         return new Terreno(this);
     }
     
@@ -83,6 +92,9 @@ public class Terreno extends Imovel {
     
     public String toString() {
         StringBuilder s = new StringBuilder();
+        s.append("Estado: "                     + this.getEstado() + "\n");
+        s.append("Rua: "                        + this.getRua() + "\n");
+        s.append("Preço pedido: "               + this.getPrecoPedido() + "\n");
         s.append("Propósito da construção: "    + this.proposito + "\n");
         s.append("Diâmetro do canal: "          + this.diametroCanal + "\n");
         s.append("Valor de kWh máximo: "        + this.kWh + "\n");

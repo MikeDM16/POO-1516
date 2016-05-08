@@ -1,3 +1,5 @@
+import java.lang.String;
+
 public class Moradia extends Imovel {
     // variáveis de instância
     private String tipo;
@@ -16,9 +18,10 @@ public class Moradia extends Imovel {
         this.nQuartos = 0;
         this.nWC = 0;
         this.nPorta = 0;
+        this.setReferencia("n/a");
     }
-    public Moradia(String rua, float precoPedido, float precoMin, String ref, String tipo, double ai, double at, double ate, int nq, int nwc, int np){
-        super(rua, precoPedido, precoMin, ref);
+    public Moradia(String rua, float precoPedido, float precoMin, String tipo, double ai, double at, double ate, int nq, int nwc, int np){
+        super(rua, precoPedido, precoMin);
         this.tipo = tipo;
         this.areaImplantacao = ai;
         this.areaTotal = at;
@@ -26,6 +29,7 @@ public class Moradia extends Imovel {
         this.nQuartos = nq;
         this.nWC = nwc;
         this.nPorta = np;
+        this.geraReferencia(Imoobiliaria.getCount());
     }
     public Moradia(Moradia m) {
         super(m);
@@ -36,6 +40,7 @@ public class Moradia extends Imovel {
         this.nQuartos = m.nQuartos;
         this.nWC = m.nWC;
         this.nPorta = m.nPorta;
+        this.setReferencia(m.getReferencia());
     }
     
     /**
@@ -99,8 +104,12 @@ public class Moradia extends Imovel {
                 this.nPorta == m.nPorta);
     }
     
-        public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder();
+        s.append("Referência: "                 + this.getReferencia() + "\n");
+        s.append("Estado: "                     + this.getEstado() + "\n");
+        s.append("Rua: "                        + this.getRua() + "\n");
+        s.append("Preço pedido: "               + this.getPrecoPedido() + "\n");
         s.append("Tipo: "                       + this.tipo + "\n");
         s.append("Area de implantação: "        + this.areaImplantacao + " m^2\n");
         s.append("Área total coberta "          + this.areaTotal + " m^2\n");

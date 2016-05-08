@@ -1,35 +1,51 @@
 import java.lang.String;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.List;
+import java.util.List;
 import java.util.Set;
 import java.util.Scanner;
+
 import Exceptions.*;
 
 public class ImoobiliariaAPP {
     // variáveis de instância
-    private static Imoobiliaria atual;
+    private static Imoobiliaria atual; 
     private static Utilizador atualUser;
     private static boolean online;
     private static int comando;
     
+    /**
+     * Não interessa o construtor de ImoobiliariaAPP
+     */
     private ImoobiliariaAPP() {}
     
+    /**
+     * Função responsável por fazer correr o programa
+     */
     public static void main(String[] args) {
+        online = false;
         atual = initApp();
         runApp();
         saida();
     }
     
+    /**
+     * Método de aceder ao utilizador atual
+     */
     public static Utilizador getAtualUser() {
         return atualUser;
     }
+    /**
+     * Método que permite saber se o utilizador atual ainda está online
+     */
     public static boolean estaOnline() {
         return online;
     }
-    public static void limpaTerminal() {
-        for (int i = 0; i < 20; i++) System.out.println("");
-    }
     
+    /**
+     * Método que permite saber se o atual utilizador tem permissões de um dado tipo ("Vendedor" ou "Comprador")
+     */
     public static boolean temAutorizacao(String nomeClasse) {
         if (atualUser.getClass().getName().equals(nomeClasse)) return true;
         return false;
@@ -41,6 +57,9 @@ public class ImoobiliariaAPP {
     public static Imoobiliaria initApp() {
         Imoobiliaria nova = new Imoobiliaria();
         try {
+            Vendedor admin = new Vendedor("admin", "admin@email.com", "123", "n/a", "n/a");
+            nova.registarUtilizador(admin);
+            atualUser = admin;
             Vendedor v1 = new Vendedor("Esmeralda Fernandes", "esmeralda@email.com", "esmeralda", "Rua da Universidade, N.º 1", "01-02-1996");
             nova.registarUtilizador(v1);
             Vendedor v2 = new Vendedor("Diogo Machado", "diogo@email.com", "diogo", "Rua do Paraíso, N.º 2", "03-04-1996");
@@ -57,8 +76,30 @@ public class ImoobiliariaAPP {
             nova.registarUtilizador(c3);
             Comprador c4 = new Comprador("Nira Fernandes", "nira@email.com", "nira", "Avenida de Brasil, N.º7", "18-07-1970");
             nova.registarUtilizador(c4);
+            Moradia m1 = new Moradia("Avenida da Quinta dos Outeiros", 100000, 90000, "Banda", 300, 200, 100, 3, 4, 15);
+            nova.registarImovel(m1);
+            Moradia m2 = new Moradia("Rua da Igreja", 10000, 9500, "Isolada", 300, 200, 100, 3, 4, 11);
+            nova.registarImovel(m2);
+            Apartamento a1 = new Apartamento("Rua Nova de Santa Cruz", 50000, 45000, "Simples", 200, 17, "2E", 2, 1, true);
+            nova.registarImovel(a1);
+            Apartamento a2 = new Apartamento("Rua dos Batatas", 57000, 55000, "Duplex", 300, 18, "4D", 4, 3, true);
+            nova.registarImovel(a2);
+            Loja l1 = new Loja("Rua dos Vasos", 15000, 14000, true, 45, 450, "Restauração");
+            nova.registarImovel(l1);
+            Loja l2 = new Loja("Rua das Bananas", 25000, 23000, false, 69, 350, "Lavandaria");
+            nova.registarImovel(l2);
+            LojaHabitavel lh1 = new LojaHabitavel("Rua Nova de Santa Cruz", 25000, 23000, false, 69, 350, "Lavandaria", a1);
+            nova.registarImovel(lh1);
+            Terreno t1 = new Terreno("Rua dos Mecos", 50000, 49000, "Armazéns", 150, 16, true, true, 2);
+            nova.registarImovel(t1);
         }
         catch(UtilizadorExistenteException e) {
+            System.out.println(e.getMensagem());
+        }
+        catch(ImovelExisteException e) {
+            System.out.println(e.getMensagem());
+        }
+        catch(SemAutorizacaoException e) {
             System.out.println(e.getMensagem());
         }
         return nova;
@@ -68,28 +109,29 @@ public class ImoobiliariaAPP {
      * Funções de impressão de cabeçalhos e menus
      */
     private static void cabecalho() {
-        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-        System.out.println("|                                                                             |");
-        System.out.println("|                                 IMOOBILIARIA                                |");
-        System.out.println("|                                                                             |");
-        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+        System.out.println("|                                                                            |");
+        System.out.println("|                                IMOOBILIARIA                                |");
+        System.out.println("|                                                                            |");
+        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
     }
     private static void saida() {
         limpaTerminal();
-        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
-        System.out.println("|                                                                             |");
-        System.out.println("| Ana Esmeralda Fernandes                                                     |");
-        System.out.println("| Diogo Gonçalves Machado                                                     |");
-        System.out.println("| Miguel Dias Miranda                                                         |");
-        System.out.println("| Rui Filipe Leite                                                            |");
-        System.out.println("|                                                                             |");
-        System.out.println("|                              PROGRAMA ENCERRADO                             |");
-        System.out.println("|                                                                             |");
-        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
+        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+        System.out.println("|                                                                           |");
+        System.out.println("| Ana Esmeralda Fernandes                                                   |");
+        System.out.println("| Diogo Gonçalves Machado                                                   |");
+        System.out.println("| Miguel Dias Miranda                                                       |");
+        System.out.println("| Rui Filipe Leite                                                          |");
+        System.out.println("|                                                                           |");
+        System.out.println("|                              PROGRAMA ENCERRADO                           |");
+        System.out.println("|                                                                           |");
+        System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - \n");
     }
     private static void menu_principal() {
         System.out.println("(1) - Iniciar sessão");
-        System.out.println("(2) - Fazer registo");
+        System.out.println("(2) - Fazer registo\n");
+        System.out.println("(3) - Mais opções\n");
         System.out.println("(0) - Sair\n");
     }
     private static void menu_conjunto() {
@@ -100,18 +142,36 @@ public class ImoobiliariaAPP {
     }
     private static void menu_sessaoIniciadaC() {
         System.out.println("(1) - Registar um imóvel como favorito");
+        System.out.println("(2) - Mais opções\n");
         System.out.println("(0) - Fechar sessão");
     }
     private static void menu_sessaoIniciadaV() {
         System.out.println("(1) - Registar imóvel");
+        System.out.println("(2) - Listar 10 últimas consultas aos imóveis em venda");
+        System.out.println("(3) - Mais opções\n");
         System.out.println("(0) - Fechar sessão");
     }
     
     /**
-     * Função que verifica se um email é válido
+     * Função que verifica se um email é válido, sintaticamente
      */
     private static boolean emailValido(String email) {
         if (!email.contains("@") || !email.contains(".")) return false;
+        return true;
+    }
+    
+    /**
+     * Função responsável por passar os parâmetros de inicio de sessão (verifica se o email é válido)
+     */
+    private static boolean autenticacaoIO() throws SemAutorizacaoException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.print("Email: ");
+        String email = input.next();
+        if (!emailValido(email)) return false;
+        if (!atual.getUtilizadores().containsKey(email)) return false;
+        System.out.print("Password: ");
+        String password = input.next();
+        iniciaSessao(email, password);
         return true;
     }
     
@@ -128,31 +188,16 @@ public class ImoobiliariaAPP {
     }
     
     /**
-     * Função responsável por passar os parâmetros de inicio de sessão (verifica se o email é válido)
-     */
-    private static boolean autenticacao() throws SemAutorizacaoException {
-        Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        System.out.print("Email: ");
-        String email = input.next();
-        if (!emailValido(email)) return false;
-        if (!atual.getUtilizadores().containsKey(email)) return false;
-        System.out.print("Password: ");
-        String password = input.next();
-        iniciaSessao(email, password);
-        return true;
-    }
-    
-    /**
      * Função responsável por fechar a sessão do utilizador atual
      */
-    public void fechaSessao() {
-        this.online = false;
+    public static void fechaSessao() {
+        online = false;
     }
     
     /**
      * Função responsável por passar os parâmetros de registo de utilizador
      */
-    private static void registoUser() throws UtilizadorExistenteException {
+    private static void registoUserIO() throws UtilizadorExistenteException {
         limpaTerminal();
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         System.out.println("REGISTO DE UTILIZADOR\n");
@@ -163,10 +208,6 @@ public class ImoobiliariaAPP {
         String nome = input.next();
         System.out.print("Email: ");
         String email = input.next();
-        while(atual.getUtilizadores().containsKey(email)) {
-            System.out.print("Email já existe. Introduza outro: ");
-            email = input.next();
-        }
         System.out.print("Password: ");
         String password = input.next();
         System.out.print("Morada: ");
@@ -179,15 +220,299 @@ public class ImoobiliariaAPP {
     }
     
     /**
+     * Função responsável por criar um novo comando inteiro
+     */
+    private static int novoComandoInt() {
+        System.out.print("-- Insira o comando: ");
+        Scanner input = new Scanner(System.in);
+        return (input.nextInt());
+    }
+    
+    private static void voltar() {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.print("-- Insira 0 para voltar. ");
+        if (input.nextInt() == 0) return;
+    }
+    
+    /**
+     * Função responsável por lançar o menu principal
+     */
+    private static void runApp() {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        boolean run = true;
+        while (run) {
+            limpaTerminal();
+            cabecalho();
+            menu_principal();
+            try {
+                comando = novoComandoInt();
+                switch (comando) {
+                    case 0: // sair
+                        run = false;
+                        break;
+                    case 1: // iniciar sessão
+                        boolean result = autenticacaoIO();
+                        while (!result) {
+                            System.out.println("A autenticação falhou. Verifique se introduziu um email válido.\n Pretende tentar de novo?     S | N");
+                            String d = input.next();
+                            if (d.equals("S")) autenticacaoIO();
+                            else break;
+                        }
+                        if (result) {
+                            if (temAutorizacao("Comprador")) interpretadorC();
+                            else interpretadorV();
+                        }
+                        break;
+                    case 2: // registar um utilizador
+                        registoUserIO();
+                        break;
+                    case 3: // mais oções
+                        interpretadorConjunto();
+                        break;
+                }
+            }
+            catch(SemAutorizacaoException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
+            catch(UtilizadorExistenteException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
+            catch (ClassNotFoundException e) {
+                e.getCause();
+                voltar();
+            }
+        }
+    }
+    
+    /**
+     * Função responsável por lançar o menu conjunto
+     */
+    private static void interpretadorConjunto() throws ClassNotFoundException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        boolean run = true;
+        while (run) {
+            limpaTerminal();
+            menu_conjunto();
+            try {
+                comando = novoComandoInt();
+                switch (comando) {
+                    case 0: // sair
+                        run = false;
+                        break;
+                    case 1: // listar imóveis de um dado tipo e até um dado preço
+                        getImovelIO();
+                }
+            }
+            catch (ClassNotFoundException e) {
+                e.getCause();
+                voltar();
+            }
+        }
+    }
+    
+    private static void getImovelIO() throws ClassNotFoundException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.println("-- Introduza o tipo de imóvel");
+        System.out.println("    (1) Moradia  (2) Apartamento  (3) Loja  (4) Terreno");
+        int opcao = input.nextInt();
+        String tipoM = new String();
+        switch (opcao) {
+            case 1:
+                tipoM = "Moradia";
+                break;
+            case 2:
+                tipoM = "Apartamento";
+                break;
+            case 3:
+                tipoM = "Loja";
+                break;
+            case 4:
+                tipoM = "Terreno";
+                break;
+        }
+        System.out.print("-- Introduza o preço: ");
+        int preco = input.nextInt();
+        List<Imovel> lista = atual.getImovel(tipoM, preco);
+        if (lista.size() == 0) {
+            System.out.println("Não existem imóveis com as especificações apresentadas");
+            voltar();
+        }
+        else {
+            for (int imprimidos = 0; imprimidos < lista.size(); imprimidos++) {
+                Imovel i = lista.get(imprimidos);
+                if (imprimidos < 5) {
+                    System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                    System.out.println(i.toString());
+                    if (i.getEstado().equals("Em venda")) registarConsulta(i.getReferencia());
+                }
+                else {
+                    System.out.println("-- Pretende ver mais resultados?   S | N");
+                    String SorN = input.next();
+                    if (SorN.equals("N")) break;
+                }
+            }
+            System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+            System.out.println("Não existem mais imóveis para mostrar");
+            voltar();
+        }
+    }
+    
+    private static void registarConsulta (String ref) {
+        Imovel i = atual.getImovel(ref);
+        i.incConsulta();
+        Vendedor proprietario = (Vendedor)atual.getUtilizador(i.getProprietario());
+        if (estaOnline()) proprietario.adicionaConsulta(atualUser.getEmail(), ref);
+        else proprietario.adicionaConsulta(ref);
+    }
+    
+    /**
+     * Função responsável por lançar o menu dos clientes
+     */
+    private static void interpretadorC() throws ClassNotFoundException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        boolean run = true;
+        Comprador atual = (Comprador)atualUser;
+        while (run) {
+            limpaTerminal();
+            System.out.println("\nSessão iniciada como comprador\n");
+            System.out.println("Bem-vindo(a) " + atualUser.getNome());
+            menu_sessaoIniciadaC();
+            try {
+                comando = novoComandoInt();
+                switch (comando) {
+                    case 0: //sair
+                        run = false;
+                        fechaSessao();
+                        break;
+                    case 1: // marcar imóvel como favorito
+                        System.out.print("-- Insira a referência do imóvel que pretende marcar como favorito");
+                        String ref = input.next();
+                        atual.setFavorito(ref);
+                        break;
+                    case 2: // mais opções
+                        interpretadorConjunto();
+                        break;
+                }
+            }
+            catch (ImovelInexistenteException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
+            catch (SemAutorizacaoException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
+        }
+    }
+    
+    /**
+     * Função responsável por lançar o menu dos vendedores
+     */
+    private static void interpretadorV() throws ClassNotFoundException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        boolean run = true;
+        while (run) {
+            limpaTerminal();
+            System.out.println("\nSessão iniciada como vendedor\n");
+            System.out.println("Bem-vindo(a) " + atualUser.getNome());
+            menu_sessaoIniciadaV();
+            try {
+                comando = novoComandoInt();
+                switch (comando) {
+                    case 0: // sair
+                        run = false;
+                        fechaSessao();
+                        break;
+                    case 1: // registar imóvel
+                        registoImovelIO();
+                        voltar();
+                        break;
+                    case 2: // listar 10 consultas
+                        getConsultasIO();
+                        voltar();
+                        break;
+                    case 3: // mais opções
+                        interpretadorConjunto();
+                        break;
+                }
+            }
+            catch (ImovelExisteException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
+            catch (SemAutorizacaoException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
+        }
+    }
+    
+    public static void getConsultasIO() throws SemAutorizacaoException {
+        if (!temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
+        else {
+            Vendedor v = (Vendedor)atualUser;
+            List<Consulta> lista = v.getConsultas();
+            if (lista.size() == 0) {
+                System.out.println("Não existem consultas registadas");
+                return;
+            }
+            System.out.println("Últimas 10 consultas aos imóveis do Vendedor " + atualUser.getNome());
+            System.out.println("Referência \t\t Data \t\t Email");
+            int t = lista.size() - 11;
+            if (t < 0) t = lista.size() - 1;
+            for (; t > 0; t--) System.out.println(lista.get(t).toString());
+        }
+    }
+    
+    /**
+     * Função responsável por passar os parâmetros de registo de imóvel
+     */
+    private static void registoImovelIO() throws ImovelExisteException, SemAutorizacaoException {
+        limpaTerminal();
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        Imovel novo = null;
+        System.out.println("REGISTO DE IMÓVEL\n");
+        System.out.println("-- Pretende registar que tipo de imóvel?");
+        System.out.println("    (M) Moradia  (A) Apartamento  (L) Loja  (LA) - Loja Habitável  (T) Terreno");
+        String tipo = input.next();
+        System.out.print("-- Rua: ");
+        String rua = input.next();
+        System.out.print("-- Preço pedido: ");
+        float precoPedido = input.nextFloat();
+        System.out.print("-- Preço mínimo aceite: ");
+        float precoMin = input.nextFloat();
+        switch (tipo) {
+            case "M":
+                novo = registoMoradiaIO(rua, precoPedido, precoMin);
+                break;
+            case "A":
+                novo = registoApartamentoIO(rua, precoPedido, precoMin);
+                break;
+            case "L":
+                novo = registoLojaIO(rua, precoPedido, precoMin);
+                break;
+            case "LA":
+                novo = registoLojaHabitavelIO(rua, precoPedido, precoMin);
+                break;
+            case "T":
+                novo = registoTerrenoIO(rua, precoPedido, precoMin);
+                break;
+        }
+        atual.registarImovel(novo);
+    }
+    
+    /**
      * Função responsável por criar uma Moradia
      */
-    private static Moradia registoMoradia(String rua, float precoPedido, float precoMin) {
+    private static Moradia registoMoradiaIO(String rua, float precoPedido, float precoMin) {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         System.out.println("-- Qual o tipo de moradia que pretende registar?");
         System.out.println("    (1) Isolada  (2) Geminada  (3) Banda  (4) Gaveto");
-        int tipoMoradia = input.nextInt();
+        int opcao = input.nextInt();
         String tipoM = new String();
-        switch (tipoMoradia) {
+        switch (opcao) {
             case 1:
                 tipoM = "Isolada";
                 break;
@@ -213,12 +538,12 @@ public class ImoobiliariaAPP {
         int nWCs = input.nextInt();
         System.out.print("-- Número de porta: ");
         int nPorta = input.nextInt();
-        return new Moradia(rua, precoPedido, precoMin, atual.geraReferencia("M", rua, nPorta), tipoM, areaImp, areaTCober, areaTEnvol, nQuartos, nWCs, nPorta);
+        return new Moradia(rua, precoPedido, precoMin, tipoM, areaImp, areaTCober, areaTEnvol, nQuartos, nWCs, nPorta);
     }
     /**
      * Função responsável por criar um Apartamento
      */
-    private static Apartamento registoApartamento(String rua, float precoPedido, float precoMin) {
+    private static Apartamento registoApartamentoIO(String rua, float precoPedido, float precoMin) {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         System.out.println("-- Qual o tipo de apartamento que pretende registar?");
         System.out.println("    (1) Simples  (2) Duplex  (3) Triplex");
@@ -243,17 +568,17 @@ public class ImoobiliariaAPP {
         int nWCs = input.nextInt();
         System.out.print("-- Número de porta: ");
         int nPorta = input.nextInt();
-        System.out.print("-- Número de andar: ");
-        int nAndar = input.nextInt();
+        System.out.print("-- Andar: ");
+        String nAndar = input.next();
         System.out.print("-- Possui garagem?  S | N: ");
         String SorN = input.next();
         boolean temGar = SorN.equals("S");
-        return new Apartamento(rua, precoPedido, precoMin, atual.geraReferencia("A", rua, nPorta), tipoM, areaT, nPorta, nAndar, nQuartos, nWCs, temGar);
+        return new Apartamento(rua, precoPedido, precoMin, tipoM, areaT, nPorta, nAndar, nQuartos, nWCs, temGar);
     }
     /**
      * Função responsável por criar uma Loja
      */
-    private static Loja registoLoja(String rua, float precoPedido, float precoMin) {
+    private static Loja registoLojaIO(String rua, float precoPedido, float precoMin) {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         System.out.print("-- Número de porta: ");
         int nPorta = input.nextInt();
@@ -264,20 +589,31 @@ public class ImoobiliariaAPP {
         System.out.print("-- Possui WC?  S | N: ");
         String SorN = input.next();
         boolean temWC = SorN.equals("S");
-        System.out.print("-- Possui parte habitacional?  S | N: ");
-        SorN = input.next();
-        boolean temParteHab = SorN.equals("S");
+        return new Loja(rua, precoPedido, precoMin, temWC, nPorta, areaT, tipoN); 
+    }
+    /**
+     * Função responsável por criar uma Loja Habitável
+     */
+    private static LojaHabitavel registoLojaHabitavelIO(String rua, float precoPedido, float precoMin) {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.print("-- Número de porta: ");
+        int nPorta = input.nextInt();
+        System.out.print("-- Área total: ");
+        double areaT = input.nextDouble();
+        System.out.print("-- Tipo de negócio viável: ");
+        String tipoN = input.next();
+        System.out.print("-- Possui WC?  S | N: ");
+        String SorN = input.next();
+        boolean temWC = SorN.equals("S");
         Apartamento aux = null;
-        if (temParteHab) {
-            System.out.println("Insira informações do apartamento\n");
-            aux = registoApartamento(rua, precoPedido, precoMin);
-        }
-        return new Loja(rua, precoPedido, precoMin, atual.geraReferencia("L", rua, nPorta), temWC, nPorta, areaT, tipoN, temParteHab, aux); 
+        System.out.println("Insira informações do apartamento\n");
+        aux = registoApartamentoIO(rua, precoPedido, precoMin);
+        return new LojaHabitavel(rua, precoPedido, precoMin, temWC, nPorta, areaT, tipoN, aux); 
     }
     /**
      * Função responsável por criar um Terreno
      */
-    private static Terreno registoTerreno(String rua, float precoPedido, float precoMin) {
+    private static Terreno registoTerrenoIO(String rua, float precoPedido, float precoMin) {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         System.out.print("-- O terreno é para construção de habitação (H) ou de armazéns (A)?");
         String prop = input.next();
@@ -293,169 +629,15 @@ public class ImoobiliariaAPP {
         System.out.print("-- Tem acesso à rede de esgotos?  S | N: ");
         SorN = input.next();
         boolean temRedeEsg = SorN.equals("S");
-        return new Terreno(rua, precoPedido, precoMin, atual.geraReferencia("T", rua, kWh), prop, diam, kWh, temRedeE, temRedeEsg);
+        System.out.print("-- Lote:");
+        int lote = input.nextInt();
+        return new Terreno(rua, precoPedido, precoMin, prop, diam, kWh, temRedeE, temRedeEsg, lote);
     }
     
     /**
-     * Função responsável por passar os parâmetros de registo de imóvel
+     * Função responsável por limpar o terminal
      */
-    private static void registoImovel() throws ImovelExisteException, SemAutorizacaoException {
-        limpaTerminal();
-        Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        Imovel novo = null;
-        System.out.println("REGISTO DE IMÓVEL\n");
-        System.out.println("-- Pretende registar que tipo de imóvel?");
-        System.out.println("    (M) Moradia  (A) Apartamento  (L) Loja  (T) Terreno");
-        String tipo = input.next();
-        System.out.print("-- Rua: ");
-        String rua = input.next();
-        System.out.print("-- Preço pedido: ");
-        float precoPedido = input.nextFloat();
-        System.out.print("-- Preço mínimo aceite: ");
-        float precoMin = input.nextFloat();
-        switch (tipo) {
-            case "M":
-                novo = registoMoradia(rua, precoPedido, precoMin);
-                break;
-            case "A":
-                novo = registoApartamento(rua, precoPedido, precoMin);
-                break;
-            case "L":
-                novo = registoLoja(rua, precoPedido, precoMin);
-                break;
-            case "T":
-                novo = registoTerreno(rua, precoPedido, precoMin);
-                break;
-        }
-        atual.registarImovel(novo);
-    }
-    
-    private static int novoComandoInt() {
-        System.out.print("-- Insira o comando: ");
-        Scanner input = new Scanner(System.in);
-        return (input.nextInt());
-    }
-    
-    private static void runApp() {
-        Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        boolean run = true, clean = true;
-        while (run) {
-            if (clean) limpaTerminal();
-            cabecalho();
-            menu_principal();
-            try {
-                comando = novoComandoInt();
-                switch (comando) {
-                    case 0: // sair
-                        run = false;
-                        break;
-                    case 1: // iniciar sessão
-                        boolean result = autenticacao();
-                        while (!result) {
-                            System.out.println("A autenticação falhou. Verifique se introduziu um email válido.\n Pretende tentar de novo?     S | N");
-                            String d = input.next();
-                            if (d.equals("S")) autenticacao();
-                            else break;
-                        }
-                        if (result) {
-                            if (temAutorizacao("Comprador")) interpretadorC();
-                            else interpretadorV();
-                        }
-                        break;
-                    case 2: // registar um utilizador
-                        registoUser();
-                        break;
-                }
-            }
-            catch(SemAutorizacaoException e) {
-                System.out.println(e.getMensagem());
-                clean = false;
-            }
-            catch(UtilizadorExistenteException e) {
-                System.out.println(e.getMensagem());
-                clean = false;
-            }
-        }
-    }
-    
-    private static void interpretadorConjunto() {
-        Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        boolean run = true, clean = true;
-        while (run) {
-            limpaTerminal();
-            menu_conjunto();
-            /*try {*/
-                comando = novoComandoInt();
-                switch (comando) {
-                    case 0: //sair
-                        run = false;
-                        break;
-                    }
-            /*}*/
-        }
-    }
-    
-    private static void interpretadorC() {
-        Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        boolean run = true, clean = true;
-        while (run) {
-            limpaTerminal();
-            System.out.println("\nSessão iniciada como comprador\n");
-            System.out.println("Bem-vindo(a) " + atualUser.getNome());
-            menu_sessaoIniciadaC();
-            try {
-                comando = novoComandoInt();
-                switch (comando) {
-                    case 0: //sair
-                        run = false;
-                        break;
-                    case 1: // marcar imóvel como favorito
-
-                        System.out.print("-- Insira a referência do imóvel que pretende marcar como favorito");
-                        String ref = input.next();
-                        Comprador.setFavorito(ref);
-                        break;
-                    }
-            }
-            catch (ImovelInexistenteException e) {
-                System.out.println(e.getMensagem());
-                clean = false;
-            }
-            catch (SemAutorizacaoException e) {
-                System.out.println(e.getMensagem());
-                clean = false;
-            }
-        }
-    }
-    
-    private static void interpretadorV() {
-        Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        boolean run = true, clean = true;
-        while (run) {
-            if (clean) limpaTerminal();
-            System.out.println("\nSessão iniciada como vendedor\n");
-            System.out.println("Bem-vindo(a) " + atualUser.getNome());
-            menu_sessaoIniciadaV();
-            try {
-                comando = novoComandoInt();
-                switch (comando) {
-                    case 0: // sair
-                        run = false;
-                        break;
-                    case 1: // registar imóvel
-                        registoImovel();
-                        clean = false;
-                        break;
-                }
-            }
-            catch (ImovelExisteException e) {
-                System.out.println(e.getMensagem());
-                clean = false;
-            }
-            catch (SemAutorizacaoException e) {
-                System.out.println(e.getMensagem());
-                clean = false;
-            }
-        }
+    public static void limpaTerminal() {
+        for (int i = 0; i < 20; i++) System.out.println("");
     }
 }

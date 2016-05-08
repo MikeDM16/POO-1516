@@ -2,9 +2,9 @@ import java.lang.String;
 
 public class Apartamento extends Imovel {
     // variáveis de instância
-    private String tipo;
+    private String tipo, andar;
     private double area;
-    private int numPorta, andar, quartos, wc;
+    private int numPorta, quartos, wc;
     private boolean garagem;
         
     /**
@@ -15,13 +15,13 @@ public class Apartamento extends Imovel {
         this.tipo = "n/a";
         this.area = 0.0;
         this.numPorta = 0;
-        this.andar = 0;
+        this.andar = "n/a";
         this.quartos = 0;
         this.wc = 0;
         this.garagem = false;
     }
-    public Apartamento(String rua, float precoPedido, float precoMin, String ref, String tipo, double area, int porta, int andar, int quartos, int wc, boolean garagem){
-        super(rua, precoPedido, precoMin, ref);
+    public Apartamento(String rua, float precoPedido, float precoMin, String tipo, double area, int porta, String andar, int quartos, int wc, boolean garagem){
+        super(rua, precoPedido, precoMin);
         this.tipo = tipo;
         this.area = area;
         this.numPorta = porta;
@@ -29,6 +29,7 @@ public class Apartamento extends Imovel {
         this.quartos = quartos;
         this.wc = wc;
         this.garagem = garagem;
+        this.geraReferencia(Imoobiliaria.getCount());
     }
     public Apartamento (Apartamento a){
         super(a);
@@ -39,6 +40,7 @@ public class Apartamento extends Imovel {
         this.quartos = a.quartos;
         this.wc = a.wc;
         this.garagem = a.garagem;
+        this.setReferencia(a.getReferencia());
     }
     
     /**
@@ -47,7 +49,7 @@ public class Apartamento extends Imovel {
     public int getNumero() {
         return this.numPorta;
     }
-    public int getAndar() {
+    public String getAndar() {
         return this.andar;
     }
     public int getQuartos() {
@@ -69,7 +71,7 @@ public class Apartamento extends Imovel {
     public void setNumero(int n) {
         this.numPorta = n;
     }
-    public void setAndar(int a) {
+    public void setAndar(String a) {
         this.andar = a;
     }
     public void setQuartos(int q) {
@@ -97,13 +99,16 @@ public class Apartamento extends Imovel {
         if (result == false) return false;
         Apartamento a = (Apartamento)obj;
         return (this.tipo.equals(a.tipo) && this.area == a.area &&
-                this.numPorta == a.numPorta && this.andar == a.andar &&
+                this.numPorta == a.numPorta && this.andar.equals(a.andar) &&
                 this.quartos == a.quartos && this.wc == a.wc &&
                 this.garagem == a.garagem);
     }
     
-    public String toString (){
+    public String toString () {
         StringBuilder s = new StringBuilder();
+        s.append("Estado: "                     + this.getEstado() + "\n");
+        s.append("Rua: "                        + this.getRua() + "\n");
+        s.append("Preço pedido: "               + this.getPrecoPedido() + "\n");
         s.append ("Tipo: "                      + this.tipo + "\n");
         s.append ("Area total :"                + this.area + "\n" );
         s.append ("Numero de Quartos :"         + this.quartos + "\n" );

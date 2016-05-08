@@ -1,4 +1,5 @@
 import java.util.GregorianCalendar;
+import java.lang.String;
 
 public class Consulta {
     // variáveis de instância
@@ -11,7 +12,7 @@ public class Consulta {
      */
     public Consulta(String referenciaImovel) {
         this.data = new GregorianCalendar();
-        this.emailUser = null;
+        this.emailUser = "Sem email";
         this.referenciaImovel = referenciaImovel;
     }
     
@@ -19,5 +20,13 @@ public class Consulta {
         this.data = new GregorianCalendar();
         this.emailUser = email;
         this.referenciaImovel = referenciaImovel;
+    }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(referenciaImovel + "\t\t" + 
+                  data.get(data.DAY_OF_MONTH) + "/" + data.get(data.MONTH + 1) + "/" + data.get(data.YEAR) + "\t\t" +
+                  emailUser);
+        return sb.toString();
     }
 }

@@ -64,7 +64,9 @@ public abstract class Utilizador {
     public void setDataN(String d) {
         this.dataN = d;
     }
-       
+    
+    public abstract Utilizador clone();
+    
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if ((obj == null) || (this.getClass() != this.getClass())) return false;

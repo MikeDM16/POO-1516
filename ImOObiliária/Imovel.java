@@ -2,10 +2,11 @@ import java.lang.String;
 
 public abstract class Imovel {
     // variáveis de instância
-    private String ref;
+    private String ref, proprietario;
     private String rua;
     private float precoPedido, precoMin;
     private int consultas;
+    private String estado;
 
     /**
      * Construtores para objetos da classe Imovel
@@ -14,22 +15,25 @@ public abstract class Imovel {
         this.rua = "n/a";
         this.precoPedido = 0;
         this.precoMin = 0;
-        this.ref = "n/a";
         this.consultas = 0;
+        this.estado = "n/a";
+        this.proprietario = "n/a";
     }
-    public Imovel(String rua, float precoPedido, float precoMin, String ref) {
+    public Imovel(String rua, float precoPedido, float precoMin) {
         this.rua = rua;
         this.precoPedido = precoPedido;
         this.precoMin = precoMin;
-        this.ref = ref;
         this.consultas = 0;
+        this.estado = "Em venda";
+        this.proprietario = ImoobiliariaAPP.getAtualUser().getEmail();
     }
     public Imovel(Imovel i) {
         this.rua = i.rua;
         this.precoPedido = i.precoPedido;
         this.precoMin = i.precoMin;
-        this.ref = i.ref;
         this.consultas = i.consultas;
+        this.estado = i.estado;
+        this.proprietario = i.proprietario;
     }
     
     /**
@@ -50,6 +54,12 @@ public abstract class Imovel {
     public int getConsultas() {
         return this.consultas;
     }
+    public String getEstado() {
+        return this.estado;
+    }
+    public String getProprietario() {
+        return this.proprietario;
+    }
     
     public void setRua(String r) {
         this.rua = r;
@@ -60,9 +70,44 @@ public abstract class Imovel {
     public void setPrecoMin(float p) {
         this.precoMin = p;
     }
-    public void addConsulta() {
+    public void incConsulta() {
         this.consultas++;
     }
+    public void setReferencia(String ref) {
+        this.ref = ref;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+   
+    public void geraReferencia(int count) {
+        StringBuilder sb = new StringBuilder();
+        switch (this.getClass().getName()) {
+            case "Moradia":
+                Moradia m = (Moradia)this;
+                sb.append("Mor-" + count);
+                break;
+            case "Apartamento":
+                Apartamento a = (Apartamento)this;
+                sb.append("Apar-" + count);
+                break;
+            case "Loja":
+                Loja l = (Loja)this;
+                sb.append("Loj-" + count);
+                break;
+            case "LojaHabitavel":
+                LojaHabitavel lh = (LojaHabitavel)this;
+                sb.append("LojH-" + count);
+                break;
+            case "Terreno":
+                Terreno t = (Terreno)this;
+                sb.append("Terr-" + count);
+                break;
+        }
+        this.ref = sb.toString();
+    }
+    
+    public abstract Imovel clone();
     
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -70,12 +115,5 @@ public abstract class Imovel {
         Imovel i = (Imovel)obj;
         return (this.rua.equals(i.rua) && this.precoPedido == i.precoPedido && 
                 this.precoMin == i.precoMin);
-    }
-    
-    public String toString(Imovel i) {
-        StringBuilder s = new StringBuilder();
-        s.append("Rua: "            + this.getRua() + "\n");
-        s.append("Preço pedido: "   + this.getPrecoPedido() + "\n");
-        return s.toString();
     }
 }
