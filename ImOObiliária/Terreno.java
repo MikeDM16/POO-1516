@@ -18,15 +18,15 @@ public class Terreno extends Imovel {
         this.lote = 0;
         this.setReferencia("n/a");
     }
-    public Terreno(String rua, float precoPedido, float precoMin, String proposito, float diametroCanal, int kWh, boolean redeEletrica, boolean esgoto, int lote) {
-        super(rua, precoPedido, precoMin);
+    public Terreno(int count, String prop, String rua, float precoPedido, float precoMin, String proposito, float diametroCanal, int kWh, boolean redeEletrica, boolean esgoto, int lote) {
+        super(count, prop, rua, precoPedido, precoMin);
         this.proposito = proposito;
         this.diametroCanal = diametroCanal;
         this.kWh = kWh;
         this.redeEletr = redeEletrica;
         this.esgoto = esgoto;
         this.lote = lote;
-        this.geraReferencia(Imoobiliaria.getCount());
+        this.geraReferencia(count);
     }
     public Terreno(Terreno t) {
         super(t);

@@ -34,10 +34,8 @@ public class Comprador extends Utilizador {
         return copia;
     }
     
-    public void setFavorito(String idImovel) throws ImovelInexistenteException, SemAutorizacaoException {
-        if (!Imoobiliaria.existeImovel(idImovel)) throw new ImovelInexistenteException();
-        if (!ImoobiliariaAPP.getAtualUser().getClass().getName().equals("Comprador")) throw new SemAutorizacaoException();
-        favoritos.add(idImovel);
+    public void addFavorito(String ref) {
+        this.favoritos.add(ref);
     }
     
     public Comprador clone() {

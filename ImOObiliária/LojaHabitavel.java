@@ -1,4 +1,4 @@
-public class LojaHabitavel extends Loja {
+public class LojaHabitavel extends Loja implements Habitavel {
     // Variaveis da instancia
     private Apartamento p;
     
@@ -9,10 +9,10 @@ public class LojaHabitavel extends Loja {
         super();
         this.setReferencia("n/a");
     }
-    public LojaHabitavel(String rua, float precoPedido, float precoMin, boolean wc, int numPorta, double area, String tipoNegocio, Apartamento p) {
-        super(rua, precoPedido, precoMin, wc, numPorta, area, tipoNegocio);
+    public LojaHabitavel(int count, String prop, String rua, float precoPedido, float precoMin, boolean wc, int numPorta, double area, String tipoNegocio, Apartamento p) {
+        super(count, prop, rua, precoPedido, precoMin, wc, numPorta, area, tipoNegocio);
         this.p = p;
-        this.geraReferencia(Imoobiliaria.getCount());
+        this.geraReferencia(count);
     }
     public LojaHabitavel(LojaHabitavel l){ 
         super(l);

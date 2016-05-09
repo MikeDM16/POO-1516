@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.TreeSet;
 
 import Exceptions.*;
@@ -31,7 +32,7 @@ public class Vendedor extends Utilizador {
         super(v);
         this.portfolio = v.getPortf();
         this.historico = v.getHist();
-        this.consultas = v.getConsulta();
+        this.consultas = v.getConsultas();
     }
     
     /**
@@ -47,11 +48,32 @@ public class Vendedor extends Utilizador {
         for (String r: this.historico) copia.add(r);
         return copia;
     }
-    public List<Consulta> getConsulta() {
+    public List<Consulta> getConsultas() {
         List<Consulta> copia = new ArrayList<>();
         for (Consulta i: this.consultas) copia.add(i);
         return copia;
     }
+    
+    public void atualizaPortHist(String ref, String estado) {
+        switch (estado) {
+            case "Vendido":
+                this.historico.add(ref);
+                this.portfolio.remove(ref);
+                break;
+            case "Reservado":
+                break;
+            case "Em venda":
+                this.portfolio.add(ref);
+                this.historico.remove(ref);
+                break;                
+        }
+    }
+    
+    public boolean possuiImovel(String ref) {
+        return (this.portfolio.contains(ref) || this.historico.contains(ref));
+    }
+    
+        
     
     public void imprimeImoveis() {
         for (String i: this.portfolio) {
@@ -63,12 +85,6 @@ public class Vendedor extends Utilizador {
         for (Consulta i: this.consultas) {
             System.out.println(i.toString());
         }
-    }
-    
-    public List<Consulta> getConsultas() throws SemAutorizacaoException {
-        List<Consulta> copia = new ArrayList<>();
-        for (Consulta i: this.consultas) copia.add(i);
-        return copia;
     }
     
     public void adicionaImovelVenda(String ref) {

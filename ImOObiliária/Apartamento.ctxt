@@ -2,8 +2,8 @@
 comment0.params=
 comment0.target=Apartamento()
 comment0.text=\r\n\ Construtores\ para\ objetos\ da\ classe\ Apartamento\r\n
-comment1.params=rua\ precoPedido\ precoMin\ tipo\ area\ porta\ andar\ quartos\ wc\ garagem
-comment1.target=Apartamento(java.lang.String,\ float,\ float,\ java.lang.String,\ double,\ int,\ java.lang.String,\ int,\ int,\ boolean)
+comment1.params=count\ prop\ rua\ precoPedido\ precoMin\ tipo\ area\ porta\ andar\ quartos\ wc\ garagem
+comment1.target=Apartamento(int,\ java.lang.String,\ java.lang.String,\ float,\ float,\ java.lang.String,\ double,\ int,\ java.lang.String,\ int,\ int,\ boolean)
 comment10.params=n
 comment10.target=void\ setNumero(int)
 comment11.params=a

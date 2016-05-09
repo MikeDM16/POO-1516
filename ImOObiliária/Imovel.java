@@ -19,13 +19,13 @@ public abstract class Imovel {
         this.estado = "n/a";
         this.proprietario = "n/a";
     }
-    public Imovel(String rua, float precoPedido, float precoMin) {
+    public Imovel(int count, String prop, String rua, float precoPedido, float precoMin) {
         this.rua = rua;
         this.precoPedido = precoPedido;
         this.precoMin = precoMin;
         this.consultas = 0;
         this.estado = "Em venda";
-        this.proprietario = ImoobiliariaAPP.getAtualUser().getEmail();
+        this.proprietario = prop;
     }
     public Imovel(Imovel i) {
         this.rua = i.rua;
@@ -79,7 +79,7 @@ public abstract class Imovel {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-   
+    
     public void geraReferencia(int count) {
         StringBuilder sb = new StringBuilder();
         switch (this.getClass().getName()) {

@@ -7,15 +7,21 @@ import java.util.TreeMap;
 import java.util.Comparator;
 import java.util.Set;
 import java.lang.Class;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 import Exceptions.*;
 import java.lang.ClassNotFoundException;
 
 public class Imoobiliaria {
     // variáveis de instância
-    private static Map<String, Utilizador> utilizadores;         /* Chave == email */
-    private static Map<String, Imovel> imoveis;           /* Chave == referência */
-    private static int count;
-
+    private Map<String, Utilizador> utilizadores;         /* Chave == email */
+    private Map<String, Imovel> imoveis;                  /* Chave == referência */
+    
+    private Utilizador atualUser;
+    private boolean online;
+    private int count;
+    private Vendedor admin;
+    
     /**
      * Construtores para objetos da classe Imoobiliaria
      */
@@ -23,6 +29,9 @@ public class Imoobiliaria {
         this.utilizadores = new TreeMap<>();
         this.imoveis = new TreeMap<String, Imovel>();
         this.count = 0;
+        this.admin = new Vendedor("admin", "admin@email.com", "123", "n/a", "n/a");
+        this.atualUser = admin;
+        this.online = false;
     }
     
     /**
@@ -40,15 +49,47 @@ public class Imoobiliaria {
             copia.put(e.getKey(), e.getValue().clone()); 
         return copia;
     }
-    public static int getCount() {
-        return count;
-    }
-    
     public Utilizador getUtilizador(String email) {
-        return (this.utilizadores.get(email));
+        return this.utilizadores.get(email);
     }
     public Imovel getImovel(String ref) {
-        return (this.imoveis.get(ref));
+        return this.imoveis.get(ref);
+    }
+    public int getCount() {
+        return this.count;
+    }
+    public Utilizador getAdmin() {
+        return this.admin;
+    }
+    /**
+     * Método de aceder ao utilizador atual
+     */
+    public Utilizador getAtualUser() {
+        return this.atualUser;
+    }
+    /**
+     * Método que permite saber se o utilizador atual ainda está online
+     */
+    public boolean estaOnline() {
+        return this.online;
+    }
+    public int getNConsultas(String ref) {
+        return this.imoveis.get(ref).getConsultas();
+    }
+    
+    public void setOnline(boolean e) {
+        this.online = e;
+    }
+    public void setEstado(String idImovel, String estado) {
+        Imovel i = this.imoveis.get(idImovel);
+        i.setEstado(estado);
+    }
+    
+    /**
+     * Método que permite saber se o atual utilizador tem permissões de um dado tipo ("Vendedor" ou "Comprador")
+     */
+    public boolean temAutorizacao(String nomeClasse) {
+        return (this.atualUser.getClass().getName().equals(nomeClasse));
     }
     
     public boolean existeUtilizador(Utilizador utilizador) {
@@ -58,11 +99,38 @@ public class Imoobiliaria {
         return (this.utilizadores.containsKey(email));
     }
     
-    public static boolean existeImovel(Imovel imovel) {
+    public boolean existeImovel(Imovel imovel) {
         return (imoveis.containsValue(imovel));
     }
-    public static boolean existeImovel(String referencia) {
+    public boolean existeImovel(String referencia) {
         return (imoveis.containsKey(referencia));
+    }
+    
+    /**
+     * Função que inicia a sessao de um utilizador (o email que recebe é válido)
+     */
+    public void iniciaSessao(String email, String password) throws SemAutorizacaoException {
+        Utilizador aux = getUtilizadores().get(email);
+        if (!aux.getPass().equals(password)) throw new SemAutorizacaoException();
+        else {
+            this.atualUser = aux;
+            this.online = true;
+        }
+    }
+    
+    /**
+     * Função responsável por fechar a sessão do utilizador atual
+     */
+    public void fechaSessao() {
+        this.online = false;
+    }
+    
+    public void registarConsulta (String ref) {
+        Imovel i = this.getImovel(ref);
+        i.incConsulta();
+        Vendedor proprietario = (Vendedor)this.getUtilizador(i.getProprietario());
+        if (this.estaOnline()) proprietario.adicionaConsulta(this.atualUser.getEmail(), ref);
+        else proprietario.adicionaConsulta(ref);
     }
     
     public void registarUtilizador(Utilizador utilizador) throws UtilizadorExistenteException {
@@ -72,10 +140,10 @@ public class Imoobiliaria {
     }
     
     public void registarImovel(Imovel im) throws ImovelExisteException, SemAutorizacaoException {
-        if (!ImoobiliariaAPP.temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
-        if (existeImovel(im)) throw new ImovelExisteException();
+        if (!this.temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
+        if (this.existeImovel(im)) throw new ImovelExisteException();
         this.imoveis.put(im.getReferencia(), im);
-        Vendedor atual = (Vendedor)ImoobiliariaAPP.getAtualUser(); 
+        Vendedor atual = (Vendedor)this.atualUser; 
         atual.adicionaImovelVenda(im.getReferencia());
         this.count++;
         System.out.println(im.getProprietario() + " registou com sucesso o/a " + im.getClass().getName() + ", com a referência " + im.getReferencia());
@@ -83,10 +151,22 @@ public class Imoobiliaria {
     
     public List<Imovel> getImovel(String classe, int preco) throws ClassNotFoundException {
         List<Imovel> nova = new ArrayList<Imovel>();
-        for (Map.Entry<String, Imovel> i: imoveis.entrySet()) {
+        for (Map.Entry<String, Imovel> i: this.imoveis.entrySet()) {
             Imovel aux = i.getValue();
             if (Class.forName(classe).isInstance(aux) && aux.getPrecoPedido() <= preco) nova.add(aux.clone());
         }
         return nova;
+    }
+    
+    public Set<String> getTopImoveis(int n) {
+        Vendedor v = (Vendedor)this.atualUser;
+        return v.getPortf().stream().filter(ref -> this.getNConsultas(ref) >= n).collect(Collectors.toSet());
+    }
+    
+    public void setFavorito(String idImovel) throws ImovelInexistenteException, SemAutorizacaoException {
+        if (!this.existeImovel(idImovel)) throw new ImovelInexistenteException();
+        if (!temAutorizacao("Comprador")) throw new SemAutorizacaoException();
+        Comprador c = (Comprador)this.atualUser;
+        c.addFavorito(idImovel);
     }
 }

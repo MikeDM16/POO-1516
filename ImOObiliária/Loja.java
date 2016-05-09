@@ -16,13 +16,13 @@ public class Loja extends Imovel {
         this.wc = false;
         this.setReferencia("n/a");
     }
-    public Loja(String rua, float precoPedido, float precoMin, boolean wc, int numPorta, double area, String tipoNegocio) {
-        super(rua, precoPedido, precoMin);
+    public Loja(int count, String prop, String rua, float precoPedido, float precoMin, boolean wc, int numPorta, double area, String tipoNegocio) {
+        super(count, prop, rua, precoPedido, precoMin);
         this.wc = wc;
         this.numPorta = numPorta;
         this.area = area;
         this.tipoNeg = tipoNegocio;
-        this.geraReferencia(Imoobiliaria.getCount());
+        this.geraReferencia(count);
     }
     public Loja(Loja l){ 
         super(l);

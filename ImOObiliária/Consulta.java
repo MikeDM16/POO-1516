@@ -25,7 +25,8 @@ public class Consulta {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(referenciaImovel + "\t\t" + 
-                  data.get(data.DAY_OF_MONTH) + "/" + data.get(data.MONTH + 1) + "/" + data.get(data.YEAR) + "\t\t" +
+                  data.get(data.DAY_OF_MONTH) + "/" + (data.get(data.MONTH) + 1) + "/" + data.get(data.YEAR) + " " + 
+                  data.get(data.HOUR_OF_DAY) + "H" + data.get(data.MINUTE) + "m" + data.get(data.SECOND) + "s" + "\t" +
                   emailUser);
         return sb.toString();
     }

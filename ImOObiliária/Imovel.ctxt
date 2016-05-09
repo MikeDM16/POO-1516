@@ -2,8 +2,8 @@
 comment0.params=
 comment0.target=Imovel()
 comment0.text=\r\n\ Construtores\ para\ objetos\ da\ classe\ Imovel\r\n
-comment1.params=rua\ precoPedido\ precoMin
-comment1.target=Imovel(java.lang.String,\ float,\ float)
+comment1.params=count\ prop\ rua\ precoPedido\ precoMin
+comment1.target=Imovel(int,\ java.lang.String,\ java.lang.String,\ float,\ float)
 comment10.params=r
 comment10.target=void\ setRua(java.lang.String)
 comment11.params=p

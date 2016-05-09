@@ -2,8 +2,8 @@
 comment0.params=
 comment0.target=Loja()
 comment0.text=\r\n\ Construtores\ para\ objetos\ da\ classe\ Loja\r\n
-comment1.params=rua\ precoPedido\ precoMin\ wc\ numPorta\ area\ tipoNegocio
-comment1.target=Loja(java.lang.String,\ float,\ float,\ boolean,\ int,\ double,\ java.lang.String)
+comment1.params=count\ prop\ rua\ precoPedido\ precoMin\ wc\ numPorta\ area\ tipoNegocio
+comment1.target=Loja(int,\ java.lang.String,\ java.lang.String,\ float,\ float,\ boolean,\ int,\ double,\ java.lang.String)
 comment10.params=s
 comment10.target=void\ setTNeg(java.lang.String)
 comment11.params=

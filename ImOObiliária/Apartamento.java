@@ -1,6 +1,6 @@
 import java.lang.String;
 
-public class Apartamento extends Imovel {
+public class Apartamento extends Imovel implements Habitavel {
     // variáveis de instância
     private String tipo, andar;
     private double area;
@@ -20,8 +20,8 @@ public class Apartamento extends Imovel {
         this.wc = 0;
         this.garagem = false;
     }
-    public Apartamento(String rua, float precoPedido, float precoMin, String tipo, double area, int porta, String andar, int quartos, int wc, boolean garagem){
-        super(rua, precoPedido, precoMin);
+    public Apartamento(int count, String prop, String rua, float precoPedido, float precoMin, String tipo, double area, int porta, String andar, int quartos, int wc, boolean garagem){
+        super(count, prop, rua, precoPedido, precoMin);
         this.tipo = tipo;
         this.area = area;
         this.numPorta = porta;
@@ -29,7 +29,7 @@ public class Apartamento extends Imovel {
         this.quartos = quartos;
         this.wc = wc;
         this.garagem = garagem;
-        this.geraReferencia(Imoobiliaria.getCount());
+        this.geraReferencia(count);
     }
     public Apartamento (Apartamento a){
         super(a);
