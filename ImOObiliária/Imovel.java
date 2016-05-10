@@ -1,6 +1,7 @@
 import java.lang.String;
+import java.io.*;
 
-public abstract class Imovel {
+public abstract class Imovel implements Serializable {
     // variáveis de instância
     private String ref, proprietario;
     private String rua;

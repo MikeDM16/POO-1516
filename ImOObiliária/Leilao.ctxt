@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Leilao()
+comment0.text=\r\n\ Construtor\ para\ objetos\ da\ classe\ Leilao\r\n
+comment1.params=im\ horas
+comment1.target=void\ iniciaLeilao(Imovel,\ int)
+comment2.params=idComprador\ limite\ incrementos\ minutos
+comment2.target=void\ adicionaComprador(java.lang.String,\ double,\ double,\ double)
+numComments=3

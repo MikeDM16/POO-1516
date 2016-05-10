@@ -1,7 +1,8 @@
 import java.lang.String;
 import java.util.ArrayList;
+import java.io.*;
 
-public abstract class Utilizador {
+public abstract class Utilizador implements Serializable {
     // variáveis de instância
     private String nome, email, password, morada, dataN;
 

@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.joining;
 
-public class Imoobiliaria {
+public class Imoobiliaria implements Serializable {
     // variáveis de instância
     private Map<String, Utilizador> utilizadores;         /* Chave == email */
     private Map<String, Imovel> imoveis;                  /* Chave == referência */
     
-    private Utilizador atualUser;
+    private String atualUser;
     private boolean online;
     private int count;
     private Vendedor admin;
@@ -24,7 +24,7 @@ public class Imoobiliaria {
         this.imoveis = new TreeMap<String, Imovel>();
         this.count = 0;
         this.admin = new Vendedor("admin", "admin@email.com", "123", "n/a", "n/a");
-        this.atualUser = admin;
+        this.atualUser = "admin@email.com";
         this.online = false;
     }
     
@@ -58,7 +58,7 @@ public class Imoobiliaria {
     /**
      * Método de aceder ao utilizador atual
      */
-    public Utilizador getAtualUser() {
+    public String getAtualUser() {
         return this.atualUser;
     }
     /**
@@ -83,7 +83,7 @@ public class Imoobiliaria {
      * Método que permite saber se o atual utilizador tem permissões de um dado tipo ("Vendedor" ou "Comprador")
      */
     public boolean temAutorizacao(String nomeClasse) {
-        return (this.atualUser.getClass().getName().equals(nomeClasse));
+        return (this.utilizadores.get(atualUser).getClass().getName().equals(nomeClasse));
     }
     
     public boolean existeUtilizador(Utilizador utilizador) {
@@ -107,7 +107,7 @@ public class Imoobiliaria {
         Utilizador aux = getUtilizadores().get(email);
         if (!aux.getPass().equals(password)) throw new SemAutorizacaoException();
         else {
-            this.atualUser = aux;
+            this.atualUser = email;
             this.online = true;
         }
     }
@@ -123,7 +123,7 @@ public class Imoobiliaria {
         Imovel i = this.getImovel(ref);
         i.incConsulta();
         Vendedor proprietario = (Vendedor)this.getUtilizador(i.getProprietario());
-        if (this.estaOnline()) proprietario.adicionaConsulta(this.atualUser.getEmail(), ref);
+        if (this.online == true) proprietario.adicionaConsulta(this.atualUser, ref);
         else proprietario.adicionaConsulta(ref);
     }
     
@@ -137,10 +137,16 @@ public class Imoobiliaria {
         if (!this.temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
         if (this.existeImovel(im)) throw new ImovelExisteException();
         this.imoveis.put(im.getReferencia(), im);
-        Vendedor atual = (Vendedor)this.atualUser; 
+        Vendedor atual = (Vendedor)this.utilizadores.get(this.atualUser); 
         atual.adicionaImovelVenda(im.getReferencia());
         this.count++;
         System.out.println(im.getProprietario() + " registou com sucesso o/a " + im.getClass().getName() + ", com a referência " + im.getReferencia());
+    }
+    
+
+    public List<Consulta> getConsultasAtual() {
+        Vendedor v = (Vendedor)this.utilizadores.get(atualUser);
+        return v.getConsultas();
     }
     
     public List<Imovel> getImovel(String classe, int preco) throws ClassNotFoundException {
@@ -156,7 +162,7 @@ public class Imoobiliaria {
     }
     
     public Set<String> getTopImoveis(int n) {
-        Vendedor v = (Vendedor)this.atualUser;
+        Vendedor v = (Vendedor)this.utilizadores.get(atualUser);
         return v.getPortf().stream().filter(ref -> this.getNConsultas(ref) >= n).collect(Collectors.toSet());
     }
     
@@ -186,13 +192,13 @@ public class Imoobiliaria {
     public void setFavorito(String idImovel) throws ImovelInexistenteException, SemAutorizacaoException {
         if (!this.existeImovel(idImovel)) throw new ImovelInexistenteException();
         if (!temAutorizacao("Comprador")) throw new SemAutorizacaoException();
-        Comprador c = (Comprador)this.atualUser;
+        Comprador c = (Comprador)this.utilizadores.get(atualUser);
         c.addFavorito(idImovel);
     }
     
     public TreeSet<Imovel> getFavoritos() throws SemAutorizacaoException {
         if (!temAutorizacao("Comprador")) throw new SemAutorizacaoException();
-        Comprador c = (Comprador)this.atualUser;
+        Comprador c = (Comprador)this.utilizadores.get(atualUser);
         TreeSet<Imovel> favImoveis = new TreeSet<Imovel>(new ComparatorImovelPreco());
         Set<String> favStrings = c.getFavoritos();
         for (String s: favStrings) favImoveis.add(getImovel(s).clone());

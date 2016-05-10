@@ -1,7 +1,8 @@
 import java.util.GregorianCalendar;
 import java.lang.String;
+import java.io.*;
 
-public class Consulta {
+public class Consulta implements Serializable {
     // variáveis de instância
     private GregorianCalendar data;
     private String emailUser;

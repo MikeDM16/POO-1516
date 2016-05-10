@@ -73,8 +73,6 @@ public class Vendedor extends Utilizador {
         return (this.portfolio.contains(ref) || this.historico.contains(ref));
     }
     
-        
-    
     public void imprimeImoveis() {
         for (String i: this.portfolio) {
             System.out.println(i);
@@ -93,11 +91,11 @@ public class Vendedor extends Utilizador {
     
     public void adicionaConsulta(String ref) {
         Consulta nova = new Consulta(ref);
-        this.consultas.add(nova);
+        this.consultas.add(0, nova);
     }
     public void adicionaConsulta(String email, String ref) {
         Consulta nova = new Consulta(email, ref);
-        this.consultas.add(nova);
+        this.consultas.add(0, nova);
     }
     
     public Vendedor clone() {
