@@ -1,13 +1,7 @@
 import java.lang.String;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.List;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Scanner;
-import java.util.InputMismatchException;
 import Exceptions.*;
+import java.io.*;
+import java.util.*;
 
 public class ImoobiliariaAPP {
     // variáveis de instância
@@ -23,10 +17,28 @@ public class ImoobiliariaAPP {
      * Função responsável por fazer correr o programa
      */
     public static void main(String[] args) {
-        atual = initApp();
+        carregarDados();
         atual.setOnline(false);
         runApp();
         saida();
+    }
+    
+     private static void carregarDados() {
+        try {
+            atual = Imoobiliaria.leObj("estado.tabemp");
+        }
+        catch (IOException e) {
+            System.out.println("Não consegui ler os dados!\nFicheiro com formato desconhecido.");
+            atual = initApp();
+        } 
+        catch (ClassNotFoundException e) {
+            System.out.println("Não consegui ler os dados!\nFicheiro com formato desconhecido.");
+            atual = initApp();
+        }
+        catch (ClassCastException e) {
+            System.out.println("Não consegui ler os dados!\nErro de formato."); 
+            atual = initApp();
+        }
     }
     
      /**
@@ -176,6 +188,7 @@ public class ImoobiliariaAPP {
         System.out.println("(1) - Iniciar sessão");
         System.out.println("(2) - Fazer registo\n");
         System.out.println("(3) - Mais opções\n");
+        System.out.println("(4) - Guardar estado do programa");
         System.out.println("(0) - Sair\n");
     }
     
@@ -214,6 +227,11 @@ public class ImoobiliariaAPP {
                     case 3: // mais oções
                         interpretadorConjunto();
                         break;
+                    case 4: // guardar estado do programa
+                        atual.gravaObj("estado.tabemp");
+                        atual.log("log.txt", true);
+                        voltar();
+                        break;
                 }
             }
             catch(SemAutorizacaoException e) {
@@ -234,6 +252,10 @@ public class ImoobiliariaAPP {
             }
             catch (EstadoInvalidoException e) {
                 System.out.println(e.getMensagem());
+                voltar();
+            }
+            catch (IOException e) {
+                System.out.println("Não consegui gravar os dados!");
                 voltar();
             }
         }

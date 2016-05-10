@@ -1,17 +1,10 @@
-import java.lang.String;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Comparator;
-import java.util.Set;
-import java.util.TreeSet;
-import java.lang.Class;
-import java.util.HashSet;
-import java.util.stream.Collectors;
+import java.lang.*;
+import java.util.*;
+import java.io.*;
 import Exceptions.*;
-import java.lang.ClassNotFoundException;
+import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.joining;
 
 public class Imoobiliaria {
     // variáveis de instância
@@ -204,5 +197,36 @@ public class Imoobiliaria {
         Set<String> favStrings = c.getFavoritos();
         for (String s: favStrings) favImoveis.add(getImovel(s).clone());
         return favImoveis;
+    }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder("--- Imóveis ---\n");
+        sb.append(this.imoveis.values().stream().map(Imovel::toString).collect(joining("\n")));
+        sb.append(this.utilizadores.values().stream().map(Utilizador::toString).collect(joining("\n")));
+        sb.append(this.count);
+        return sb.toString();
+    }
+    
+    public void gravaObj(String fich) throws IOException { 
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fich)); 
+        oos.writeObject(this); 
+        oos.flush(); 
+        oos.close(); 
+    } 
+
+    public static Imoobiliaria leObj(String fich) throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fich));
+        Imoobiliaria te = (Imoobiliaria)ois.readObject();
+        ois.close();
+        return te;
+    }
+
+    public void log(String f, boolean ap) throws IOException {
+        FileWriter fw = new FileWriter(f, ap);
+        fw.write("\n----------- LOG - LOG - LOG - LOG - LOG ----------------\n");
+        fw.write(this.toString());
+        fw.write("\n----------- LOG - LOG - LOG - LOG - LOG ----------------\n");
+        fw.flush();
+        fw.close();
     }
 }
