@@ -106,6 +106,7 @@ public class Moradia extends Imovel implements Habitavel {
     
     public String toString() {
         StringBuilder s = new StringBuilder();
+        s.append("\t\tMORADIA\n");
         s.append("Referência: "                 + this.getReferencia() + "\n");
         s.append("Estado: "                     + this.getEstado() + "\n");
         s.append("Rua: "                        + this.getRua() + "\n");

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Comparator;
 import java.util.Set;
+import java.util.TreeSet;
 import java.lang.Class;
 import java.util.HashSet;
 import java.util.stream.Collectors;
@@ -125,7 +126,7 @@ public class Imoobiliaria {
         this.online = false;
     }
     
-    public void registarConsulta (String ref) {
+    public void registarConsulta(String ref) {
         Imovel i = this.getImovel(ref);
         i.incConsulta();
         Vendedor proprietario = (Vendedor)this.getUtilizador(i.getProprietario());
@@ -153,7 +154,10 @@ public class Imoobiliaria {
         List<Imovel> nova = new ArrayList<Imovel>();
         for (Map.Entry<String, Imovel> i: this.imoveis.entrySet()) {
             Imovel aux = i.getValue();
-            if (Class.forName(classe).isInstance(aux) && aux.getPrecoPedido() <= preco) nova.add(aux.clone());
+            if (Class.forName(classe).isInstance(aux) && aux.getPrecoPedido() <= preco) {
+                nova.add(aux.clone());
+                if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getReferencia());
+            }
         }
         return nova;
     }
@@ -163,10 +167,42 @@ public class Imoobiliaria {
         return v.getPortf().stream().filter(ref -> this.getNConsultas(ref) >= n).collect(Collectors.toSet());
     }
     
+    public List<Habitavel> getHabitaveis(int preco) {
+        List<Habitavel> lista = new ArrayList<Habitavel>();
+        for (Map.Entry<String, Imovel> i: this.imoveis.entrySet()) {
+            Imovel aux = i.getValue();
+            if ((aux instanceof Habitavel) && (aux.getPrecoPedido() <= preco)) {
+                lista.add((Habitavel)aux.clone());
+                if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getReferencia());
+            }
+        }
+        return lista;
+     }
+    
+    public Map<Imovel, Vendedor> getMapeamentoImoveis() {
+        Map<Imovel, Vendedor> novo = new TreeMap<Imovel, Vendedor>(new ComparatorImovelRef());
+        for (Map.Entry<String, Imovel> i: this.imoveis.entrySet()) {
+            Imovel aux = (Imovel)i.getValue().clone();
+            if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getReferencia());
+            Vendedor v = (Vendedor)getUtilizador(aux.getProprietario()).clone();
+            novo.put(aux, v);
+        }
+        return novo;
+    }
+     
     public void setFavorito(String idImovel) throws ImovelInexistenteException, SemAutorizacaoException {
         if (!this.existeImovel(idImovel)) throw new ImovelInexistenteException();
         if (!temAutorizacao("Comprador")) throw new SemAutorizacaoException();
         Comprador c = (Comprador)this.atualUser;
         c.addFavorito(idImovel);
+    }
+    
+    public TreeSet<Imovel> getFavoritos() throws SemAutorizacaoException {
+        if (!temAutorizacao("Comprador")) throw new SemAutorizacaoException();
+        Comprador c = (Comprador)this.atualUser;
+        TreeSet<Imovel> favImoveis = new TreeSet<Imovel>(new ComparatorImovelPreco());
+        Set<String> favStrings = c.getFavoritos();
+        for (String s: favStrings) favImoveis.add(getImovel(s).clone());
+        return favImoveis;
     }
 }

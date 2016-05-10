@@ -43,7 +43,7 @@ public class LojaHabitavel extends Loja implements Habitavel {
     }
     
     public String toString() {
-        StringBuilder s = new StringBuilder("Parte habitável da Loja:\n");
+        StringBuilder s = new StringBuilder("Parte habitável da Loja " + this.getReferencia() + ":\n");
         s.append(this.p.toString());
         return s.toString();
     }

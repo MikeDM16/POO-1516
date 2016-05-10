@@ -77,6 +77,8 @@ public class Loja extends Imovel {
     
     public String toString() {
         StringBuilder s = new StringBuilder();
+        s.append("\t\tLOJA\n");
+        s.append("Referência: "         + this.getReferencia() + "\n");
         s.append("Estado: "             + this.getEstado() + "\n");
         s.append("Rua: "                + this.getRua() + "\n");
         s.append("Preço pedido: "       + this.getPrecoPedido() + "\n");

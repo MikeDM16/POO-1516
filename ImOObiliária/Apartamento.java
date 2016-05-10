@@ -106,6 +106,8 @@ public class Apartamento extends Imovel implements Habitavel {
     
     public String toString () {
         StringBuilder s = new StringBuilder();
+        s.append("\t\tAPARTAMENTO\n");
+        s.append("Referência: "                 + this.getReferencia() + "\n");
         s.append("Estado: "                     + this.getEstado() + "\n");
         s.append("Rua: "                        + this.getRua() + "\n");
         s.append("Preço pedido: "               + this.getPrecoPedido() + "\n");

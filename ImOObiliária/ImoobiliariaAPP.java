@@ -4,6 +4,7 @@ import java.util.TreeMap;
 import java.util.List;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import Exceptions.*;
@@ -16,7 +17,7 @@ public class ImoobiliariaAPP {
     /**
      * Não interessa o construtor de ImoobiliariaAPP
      */
-    public ImoobiliariaAPP() {}
+    private ImoobiliariaAPP() {}
     
     /**
      * Função responsável por fazer correr o programa
@@ -265,6 +266,15 @@ public class ImoobiliariaAPP {
                         break;
                     case 1: // listar imóveis de um dado tipo e até um dado preço
                         getImovelIO();
+                        voltar();
+                        break;
+                    case 2: // listar imóveis habitáveis ate um dado preço
+                        getHabitaveisIO();
+                        voltar();
+                        break;
+                    case 3: // apresentar mapeamento entre imóveis e vendedor
+                        getMapeamentoImoveisIO();
+                        voltar();
                         break;
                 }
             }
@@ -302,27 +312,68 @@ public class ImoobiliariaAPP {
         System.out.print("-- Introduza o preço: ");
         int preco = input.nextInt();
         List<Imovel> lista = atual.getImovel(tipoM, preco);
-        if (lista.size() == 0) {
+        if (lista.size() == 0)
             System.out.println("Não existem imóveis com as especificações apresentadas");
-            voltar();
-        }
         else {
-            for (int imprimidos = 0; imprimidos < lista.size(); imprimidos++) {
+            int imprimidos = 0;
+            for (int o = 0; o < lista.size(); o++) {
                 Imovel i = lista.get(imprimidos);
                 if (imprimidos < 5) {
                     System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
                     System.out.println(i.toString());
-                    if (i.getEstado().equals("Em venda")) atual.registarConsulta(i.getReferencia());
+                    imprimidos++;
                 }
                 else {
                     System.out.println("-- Pretende ver mais resultados?   S | N");
                     String SorN = input.next();
                     if (SorN.equals("N")) break;
+                    imprimidos = 0;
                 }
             }
             System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
             System.out.println("Não existem mais imóveis para mostrar");
-            voltar();
+        }
+    }
+    
+    public static void getHabitaveisIO() {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.print("-- Introduza o preço máximo: ");
+        int preco = input.nextInt();
+        List<Habitavel> lista = atual.getHabitaveis(preco);
+        if (lista.size() == 0)
+            System.out.println("Não existem imóveis com as especificações apresentadas");
+        else {
+            int imprimidos = 0;
+            for (int o = 0; o < lista.size(); o++) {
+                Habitavel h = lista.get(imprimidos);
+                Imovel i = (Imovel)h;
+                if (imprimidos < 5) {
+                    System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+                    System.out.println(i.toString());
+                    imprimidos++;
+                }
+                else {
+                    System.out.println("-- Pretende ver mais resultados?   S | N");
+                    String SorN = input.next();
+                    if (SorN.equals("N")) break;
+                    imprimidos = 0;
+                }
+            }
+            System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+            System.out.println("Não existem mais imóveis para mostrar");
+        }
+    }
+    
+    public static void getMapeamentoImoveisIO() {
+        Map<Imovel, Vendedor> mapeamento = atual.getMapeamentoImoveis();
+        if (mapeamento.size() == 0) System.out.println("Não existem imóveis para mostrar");
+        else {
+            System.out.println("Referência \tNome do vendedor \tEmail"); 
+            for (Map.Entry<Imovel, Vendedor> i: mapeamento.entrySet()) {
+                Imovel aux = i.getKey();
+                Vendedor v = i.getValue();
+                System.out.println(aux.getReferencia() + "\t\t" + v.getNome() + "\t\t\t" + v.getEmail()); 
+            }
         }
     }
     
@@ -331,7 +382,8 @@ public class ImoobiliariaAPP {
      */
     private static void menu_sessaoIniciadaC() {
         System.out.println("(1) - Registar um imóvel como favorito");
-        System.out.println("(2) - Mais opções\n");
+        System.out.println("(2) - Consultar imóveis favoritos ordenados por preço");
+        System.out.println("(3) - Mais opções\n");
         System.out.println("(0) - Fechar sessão");
     }
     
@@ -341,7 +393,6 @@ public class ImoobiliariaAPP {
     private static void interpretadorC() throws ClassNotFoundException {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         boolean run = true;
-        Comprador c = (Comprador)atual.getAtualUser();
         while (run) {
             limpaTerminal();
             System.out.println("\nSessão iniciada como comprador\n");
@@ -359,7 +410,11 @@ public class ImoobiliariaAPP {
                         String ref = input.next();
                         atual.setFavorito(ref);
                         break;
-                    case 2: // mais opções
+                    case 2: // consultar imóveis favoritos
+                        getFavoritosIO();
+                        voltar();
+                        break;
+                    case 3: // mais opções
                         interpretadorConjunto();
                         break;
                 }
@@ -376,6 +431,15 @@ public class ImoobiliariaAPP {
                 e.getCause();
                 voltar();
             }
+        }
+    }
+    
+    public static void getFavoritosIO() throws SemAutorizacaoException {
+        TreeSet<Imovel> favoritos = atual.getFavoritos();
+        if (favoritos.size() == 0) System.out.println("Não existem imóveis para mostrar");
+        else {
+            System.out.println("Referência \tTipo do Imóvel \t\tPreço"); 
+            for (Imovel i: favoritos) System.out.println(i.getReferencia() + "\t\t" + i.getClass().getName() + "\t\t\t" + i.getPrecoPedido());
         }
     }
     
@@ -462,7 +526,6 @@ public class ImoobiliariaAPP {
         int t = lista.size() - 11;
         if (t < 0) t = lista.size() - 1;
         for (; t >= 0; t--) System.out.println(lista.get(t).toString());
-      
     }
 
     public static void setEstadoIO() throws ImovelInexistenteException, SemAutorizacaoException, EstadoInvalidoException {
