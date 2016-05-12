@@ -593,7 +593,7 @@ public class ImoobiliariaAPP {
     
     public static void arrancaLeilaoIO() throws LeilaoTerminadoException {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        System.out.print("-- Insira a referência do imóvel em leilão");
+        System.out.print("-- Insira a referência do imóvel em leilão: ");
         String idImovel = input.next();
         atual.arrancaLeilaoAux(idImovel);
     }
