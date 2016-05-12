@@ -431,3 +431,557 @@ Comprador@15dd679
 Comprador@1ae5009
 Vendedor@68647d8
 ----------- LOG - LOG - LOG - LOG - LOG ----------------
+
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+--- Imóveis ---
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		APARTAMENTO
+Referência: Apar-3
+Estado: Em venda
+Rua: Rua dos Batatas
+Preço pedido: 57000.0
+Tipo: Duplex
+Area total :300.0
+Numero de Quartos :4
+Numero de WCs :3
+Numero de porta e Andar: 300.0 4D 
+Garagem: Sim
+
+		LOJA
+Referência: Loj-4
+Estado: Em venda
+Rua: Rua dos Vasos
+Preço pedido: 15000.0
+Área : 450.0 m^2
+Tipo de negócio: Restauração
+Número de porta: 45
+Tipo de negócio: Restauração
+WC: Sim
+
+		LOJA
+Referência: Loj-5
+Estado: Em venda
+Rua: Rua das Bananas
+Preço pedido: 25000.0
+Área : 350.0 m^2
+Tipo de negócio: Lavandaria
+Número de porta: 69
+Tipo de negócio: Lavandaria
+WC: Não
+
+Parte habitável da Loja LojH-6:
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		MORADIA
+Referência: Mor-0
+Estado: Em venda
+Rua: Avenida da Quinta dos Outeiros
+Preço pedido: 100000.0
+Tipo: Banda
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 15
+
+		MORADIA
+Referência: Mor-1
+Estado: Em venda
+Rua: Rua da Igreja
+Preço pedido: 10000.0
+Tipo: Isolada
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 11
+
+		TERRENO
+Referência: Terr-7
+Estado: Em venda
+Rua: Rua dos Mecos
+Preço pedido: 50000.0
+Propósito da construção: Armazéns
+Diâmetro do canal: 150.0
+Valor de kWh máximo: 16
+Rede elétrica: Sim
+Acesso à rede de esgotos: Sim
+Vendedor@99bd69
+Comprador@1cdf1e3
+Vendedor@dc9321
+Vendedor@1852099
+Comprador@4d8e6
+Vendedor@1c0163a
+Comprador@3fc72c
+Comprador@19b19
+Vendedor@3a6f6b8
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+--- Imóveis ---
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		APARTAMENTO
+Referência: Apar-3
+Estado: Em venda
+Rua: Rua dos Batatas
+Preço pedido: 57000.0
+Tipo: Duplex
+Area total :300.0
+Numero de Quartos :4
+Numero de WCs :3
+Numero de porta e Andar: 300.0 4D 
+Garagem: Sim
+
+		LOJA
+Referência: Loj-4
+Estado: Em venda
+Rua: Rua dos Vasos
+Preço pedido: 15000.0
+Área : 450.0 m^2
+Tipo de negócio: Restauração
+Número de porta: 45
+Tipo de negócio: Restauração
+WC: Sim
+
+		LOJA
+Referência: Loj-5
+Estado: Em venda
+Rua: Rua das Bananas
+Preço pedido: 25000.0
+Área : 350.0 m^2
+Tipo de negócio: Lavandaria
+Número de porta: 69
+Tipo de negócio: Lavandaria
+WC: Não
+
+Parte habitável da Loja LojH-6:
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		MORADIA
+Referência: Mor-0
+Estado: Em venda
+Rua: Avenida da Quinta dos Outeiros
+Preço pedido: 100000.0
+Tipo: Banda
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 15
+
+		MORADIA
+Referência: Mor-1
+Estado: Em venda
+Rua: Rua da Igreja
+Preço pedido: 10000.0
+Tipo: Isolada
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 11
+
+		TERRENO
+Referência: Terr-7
+Estado: Em venda
+Rua: Rua dos Mecos
+Preço pedido: 50000.0
+Propósito da construção: Armazéns
+Diâmetro do canal: 150.0
+Valor de kWh máximo: 16
+Rede elétrica: Sim
+Acesso à rede de esgotos: Sim
+Vendedor@99bd69
+Comprador@1cdf1e3
+Vendedor@dc9321
+Vendedor@1852099
+Comprador@4d8e6
+Vendedor@1c0163a
+Comprador@3fc72c
+Comprador@19b19
+Vendedor@3a6f6b8
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+--- Imóveis ---
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		APARTAMENTO
+Referência: Apar-3
+Estado: Em venda
+Rua: Rua dos Batatas
+Preço pedido: 57000.0
+Tipo: Duplex
+Area total :300.0
+Numero de Quartos :4
+Numero de WCs :3
+Numero de porta e Andar: 300.0 4D 
+Garagem: Sim
+
+		LOJA
+Referência: Loj-4
+Estado: Em venda
+Rua: Rua dos Vasos
+Preço pedido: 15000.0
+Área : 450.0 m^2
+Tipo de negócio: Restauração
+Número de porta: 45
+Tipo de negócio: Restauração
+WC: Sim
+
+		LOJA
+Referência: Loj-5
+Estado: Em venda
+Rua: Rua das Bananas
+Preço pedido: 25000.0
+Área : 350.0 m^2
+Tipo de negócio: Lavandaria
+Número de porta: 69
+Tipo de negócio: Lavandaria
+WC: Não
+
+Parte habitável da Loja LojH-6:
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		MORADIA
+Referência: Mor-0
+Estado: Em venda
+Rua: Avenida da Quinta dos Outeiros
+Preço pedido: 100000.0
+Tipo: Banda
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 15
+
+		MORADIA
+Referência: Mor-1
+Estado: Em venda
+Rua: Rua da Igreja
+Preço pedido: 10000.0
+Tipo: Isolada
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 11
+
+		TERRENO
+Referência: Terr-7
+Estado: Em venda
+Rua: Rua dos Mecos
+Preço pedido: 50000.0
+Propósito da construção: Armazéns
+Diâmetro do canal: 150.0
+Valor de kWh máximo: 16
+Rede elétrica: Sim
+Acesso à rede de esgotos: Sim
+Vendedor@1fac8d
+Comprador@5460bc
+Vendedor@9467d2
+Vendedor@2a418c
+Comprador@775ca5
+Vendedor@46b1d
+Comprador@156402e
+Comprador@10d7bff
+Vendedor@2b68c48
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+--- Imóveis ---
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		APARTAMENTO
+Referência: Apar-3
+Estado: Em venda
+Rua: Rua dos Batatas
+Preço pedido: 57000.0
+Tipo: Duplex
+Area total :300.0
+Numero de Quartos :4
+Numero de WCs :3
+Numero de porta e Andar: 300.0 4D 
+Garagem: Sim
+
+		LOJA
+Referência: Loj-4
+Estado: Em venda
+Rua: Rua dos Vasos
+Preço pedido: 15000.0
+Área : 450.0 m^2
+Tipo de negócio: Restauração
+Número de porta: 45
+Tipo de negócio: Restauração
+WC: Sim
+
+		LOJA
+Referência: Loj-5
+Estado: Em venda
+Rua: Rua das Bananas
+Preço pedido: 25000.0
+Área : 350.0 m^2
+Tipo de negócio: Lavandaria
+Número de porta: 69
+Tipo de negócio: Lavandaria
+WC: Não
+
+Parte habitável da Loja LojH-6:
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		MORADIA
+Referência: Mor-0
+Estado: Em venda
+Rua: Avenida da Quinta dos Outeiros
+Preço pedido: 100000.0
+Tipo: Banda
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 15
+
+		MORADIA
+Referência: Mor-1
+Estado: Em venda
+Rua: Rua da Igreja
+Preço pedido: 10000.0
+Tipo: Isolada
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 11
+
+		TERRENO
+Referência: Terr-7
+Estado: Em venda
+Rua: Rua dos Mecos
+Preço pedido: 50000.0
+Propósito da construção: Armazéns
+Diâmetro do canal: 150.0
+Valor de kWh máximo: 16
+Rede elétrica: Sim
+Acesso à rede de esgotos: Sim
+Vendedor@13b8367
+Comprador@10a044e
+Vendedor@7289b4
+Vendedor@5b6900
+Vendedor@16cbb51
+Comprador@ec336a
+Vendedor@4652fb
+Comprador@a79a07
+Comprador@b34066
+Vendedor@1f215768
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+--- Imóveis ---
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		APARTAMENTO
+Referência: Apar-3
+Estado: Em venda
+Rua: Rua dos Batatas
+Preço pedido: 57000.0
+Tipo: Duplex
+Area total :300.0
+Numero de Quartos :4
+Numero de WCs :3
+Numero de porta e Andar: 300.0 4D 
+Garagem: Sim
+
+		APARTAMENTO
+Referência: Apar-8
+Estado: Em venda
+Rua: Rua de Babais
+Preço pedido: 50000.0
+Tipo: Triplex
+Area total :120.0
+Numero de Quartos :4
+Numero de WCs :6
+Numero de porta e Andar: 120.0 5D 
+Garagem: Sim
+
+		LOJA
+Referência: Loj-4
+Estado: Em venda
+Rua: Rua dos Vasos
+Preço pedido: 15000.0
+Área : 450.0 m^2
+Tipo de negócio: Restauração
+Número de porta: 45
+Tipo de negócio: Restauração
+WC: Sim
+
+		LOJA
+Referência: Loj-5
+Estado: Em venda
+Rua: Rua das Bananas
+Preço pedido: 25000.0
+Área : 350.0 m^2
+Tipo de negócio: Lavandaria
+Número de porta: 69
+Tipo de negócio: Lavandaria
+WC: Não
+
+Parte habitável da Loja LojH-6:
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		MORADIA
+Referência: Mor-0
+Estado: Em venda
+Rua: Avenida da Quinta dos Outeiros
+Preço pedido: 100000.0
+Tipo: Banda
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 15
+
+		MORADIA
+Referência: Mor-1
+Estado: Em venda
+Rua: Rua da Igreja
+Preço pedido: 10000.0
+Tipo: Isolada
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 11
+
+		TERRENO
+Referência: Terr-7
+Estado: Em venda
+Rua: Rua dos Mecos
+Preço pedido: 50000.0
+Propósito da construção: Armazéns
+Diâmetro do canal: 150.0
+Valor de kWh máximo: 16
+Rede elétrica: Sim
+Acesso à rede de esgotos: Sim
+Vendedor@13b8367
+Comprador@10a044e
+Vendedor@7289b4
+Vendedor@5b6900
+Vendedor@16cbb51
+Comprador@ec336a
+Vendedor@4652fb
+Comprador@a79a07
+Comprador@b34066
+Vendedor@1f215769
+----------- LOG - LOG - LOG - LOG - LOG ----------------

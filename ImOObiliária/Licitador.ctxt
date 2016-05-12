@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=idComprador\ limite\ incrementos\ minutos
+comment0.target=Licitador(java.lang.String,\ double,\ double,\ double)
+comment0.text=\r\n\ Construtor\ para\ objetos\ da\ classe\ Licitador\r\n
+comment1.params=
+comment1.target=double\ getLimite()
+comment1.text=\r\n\ M\u00E9todos\ de\ inst\u00E2ncia\r\n
+comment2.params=
+comment2.target=java.lang.String\ getIdLicitador()
+comment3.params=
+comment3.target=double\ getLicitacao()
+comment4.params=
+comment4.target=void\ setUltimaLicitacao()
+comment5.params=licitacaoMaior\ idVencedor
+comment5.target=int\ Licitar(double,\ java.lang.String)
+numComments=6

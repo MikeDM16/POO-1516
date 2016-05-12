@@ -13,6 +13,10 @@ public class ImoobiliariaAPP {
      */
     private ImoobiliariaAPP() {}
     
+    public static Imoobiliaria getAtual() {
+        return atual;
+    }
+    
     /**
      * Função responsável por fazer correr o programa
      */
@@ -258,6 +262,10 @@ public class ImoobiliariaAPP {
                 System.out.println("Não consegui gravar os dados!");
                 voltar();
             }
+            catch (LeilaoTerminadoException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
         }
     }
     
@@ -405,14 +413,15 @@ public class ImoobiliariaAPP {
     private static void menu_sessaoIniciadaC() {
         System.out.println("(1) - Registar um imóvel como favorito");
         System.out.println("(2) - Consultar imóveis favoritos ordenados por preço");
-        System.out.println("(3) - Mais opções\n");
+        System.out.println("(3) - Participar num leilão");
+        System.out.println("(4) - Mais opções\n");
         System.out.println("(0) - Fechar sessão");
     }
     
     /**
      * Função responsável por lançar o menu dos clientes
      */
-    private static void interpretadorC() throws ClassNotFoundException {
+    private static void interpretadorC() throws ClassNotFoundException, LeilaoTerminadoException {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         boolean run = true;
         while (run) {
@@ -436,7 +445,11 @@ public class ImoobiliariaAPP {
                         getFavoritosIO();
                         voltar();
                         break;
-                    case 3: // mais opções
+                    case 3: // participar num leilão
+                        participaLeilaoIO();
+                        voltar();
+                        break;
+                    case 4: // mais opções
                         interpretadorConjunto();
                         break;
                 }
@@ -465,6 +478,24 @@ public class ImoobiliariaAPP {
         }
     }
     
+    public static void participaLeilaoIO() throws LeilaoTerminadoException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.println("Existem os seguintes leilões:");
+        System.out.println("Referência \t\t Duração");
+        Map<String, Leilao> leiloes = atual.getLeiloes();
+        for(Map.Entry<String, Leilao> e: leiloes.entrySet())
+            System.out.println(e.toString());
+        System.out.print("-- Insira a referência do imóvel: ");
+        String id = input.next();
+        System.out.print("-- Insira o limite que pretende gastar: ");
+        double limite = input.nextDouble();
+        System.out.print("-- Insira o valor dos incrementos: ");
+        double incrementos = input.nextDouble();
+        System.out.print("-- Insira o intervalo de tempo entre incrementos: ");
+        double minutos = input.nextDouble();
+        atual.participaLeilao(id, limite, incrementos, minutos);
+    }
+    
     /**
      * Função de impressão do menu do vendedor
      */
@@ -473,14 +504,16 @@ public class ImoobiliariaAPP {
         System.out.println("(2) - Listar 10 últimas consultas aos imóveis em venda");
         System.out.println("(3) - Alterar o estado de um imóvel");
         System.out.println("(4) - Apresentar os códigos dos seus imóveis com mais de N consultas");
-        System.out.println("(5) - Mais opções\n");
+        System.out.println("(5) - Criar leilão");
+        System.out.println("(6) - Inicar leilao");
+        System.out.println("(7) - Mais opções\n");
         System.out.println("(0) - Fechar sessão");
     }
     
     /**
      * Função responsável por lançar o menu dos vendedores
      */
-    private static void interpretadorV() throws ClassNotFoundException, EstadoInvalidoException {
+    private static void interpretadorV() throws ClassNotFoundException, EstadoInvalidoException, LeilaoTerminadoException {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         boolean run = true;
         while (run) {
@@ -511,7 +544,15 @@ public class ImoobiliariaAPP {
                         getTopImoveisIO();
                         voltar();
                         break;
-                    case 5: // mais opções
+                    case 5: // criar leilão
+                        criaLeilaoIO();
+                        voltar();
+                        break;
+                    case 6: // iniciar leilão
+                        arrancaLeilaoIO();
+                        voltar();
+                        break;
+                    case 7: // mais opções
                         interpretadorConjunto();
                         break;
                 }
@@ -532,7 +573,27 @@ public class ImoobiliariaAPP {
                 System.out.println(e.getMensagem());
                 voltar();
             }
+            catch (LeilaoTerminadoException e) {
+                System.out.println(e.getMensagem());
+                voltar();
+            }
         }
+    }
+    
+    public static void criaLeilaoIO() throws SemAutorizacaoException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.println("-- Insira a referência do imóvel que pretende leiloar");
+        String idImovel = input.next();
+        System.out.println("-- Insira o número de horas em que o leilão estará aberto");
+        int horas = input.nextInt();
+        atual.adicionaLeilao(idImovel, horas);
+    }
+    
+    public static void arrancaLeilaoIO() throws LeilaoTerminadoException {
+        Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        System.out.println("-- Insira a referência do imóvel em leilão");
+        String idImovel = input.next();
+        atual.arrancaLeilaoAux(idImovel);
     }
     
     public static void getConsultasIO() throws SemAutorizacaoException {
@@ -557,11 +618,11 @@ public class ImoobiliariaAPP {
     public static void setEstadoIO() throws ImovelInexistenteException, SemAutorizacaoException, EstadoInvalidoException {
         if (!atual.temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        System.out.print("Insira a referência do imóvel de que pretende alterar o estado: ");
+        System.out.print("--Insira a referência do imóvel de que pretende alterar o estado: ");
         String idImovel = input.next();
         Vendedor v = (Vendedor)atual.getUtilizador(atual.getAtualUser());
         if (!v.possuiImovel(idImovel)) throw new ImovelInexistenteException();
-        System.out.print("Insira o estado: ");
+        System.out.print("--Insira o estado: ");
         String estado = input.next();
         if (!estadoValido(estado)) throw new EstadoInvalidoException();
         atual.setEstado(idImovel, estado);
@@ -575,7 +636,7 @@ public class ImoobiliariaAPP {
     
     public static void getTopImoveisIO() {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        System.out.print("Introduza o valor mínimo de consultas: ");
+        System.out.print("--Introduza o valor mínimo de consultas: ");
         int n = input.nextInt();
         Set<String> colecao = atual.getTopImoveis(n);
         if (colecao.size() == 0) {

@@ -10,6 +10,7 @@ public class Imoobiliaria implements Serializable {
     // variáveis de instância
     private Map<String, Utilizador> utilizadores;         /* Chave == email */
     private Map<String, Imovel> imoveis;                  /* Chave == referência */
+    private Map<String, Leilao> leiloes;
     
     private String atualUser;
     private boolean online;
@@ -22,6 +23,7 @@ public class Imoobiliaria implements Serializable {
     public Imoobiliaria() {
         this.utilizadores = new TreeMap<>();
         this.imoveis = new TreeMap<String, Imovel>();
+        this.leiloes = new TreeMap<String, Leilao>();
         this.count = 0;
         this.admin = new Vendedor("admin", "admin@email.com", "123", "n/a", "n/a");
         this.atualUser = "admin@email.com";
@@ -40,6 +42,12 @@ public class Imoobiliaria implements Serializable {
     public Map<String, Imovel> getImoveis() {
         Map<String, Imovel> copia = new TreeMap<>();
         for(Map.Entry<String, Imovel> e: imoveis.entrySet())
+            copia.put(e.getKey(), e.getValue().clone()); 
+        return copia;
+    }
+    public Map<String, Leilao> getLeiloes() {
+        Map<String, Leilao> copia = new TreeMap<>();
+        for(Map.Entry<String, Leilao> e: leiloes.entrySet())
             copia.put(e.getKey(), e.getValue().clone()); 
         return copia;
     }
@@ -143,7 +151,6 @@ public class Imoobiliaria implements Serializable {
         System.out.println(im.getProprietario() + " registou com sucesso o/a " + im.getClass().getName() + ", com a referência " + im.getReferencia());
     }
     
-
     public List<Consulta> getConsultasAtual() {
         Vendedor v = (Vendedor)this.utilizadores.get(atualUser);
         return v.getConsultas();
@@ -234,5 +241,36 @@ public class Imoobiliaria implements Serializable {
         fw.write("\n----------- LOG - LOG - LOG - LOG - LOG ----------------\n");
         fw.flush();
         fw.close();
+    }
+    
+    public void adicionaLeilao(String im, int horas) throws SemAutorizacaoException {
+        if (!temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
+        Leilao novo = new Leilao();
+        Imovel i = imoveis.get(im);
+        novo.iniciaLeilao(i, horas);
+        this.leiloes.put(im, novo);
+    }
+    
+    public void arrancaLeilaoAux(String im) throws LeilaoTerminadoException {
+        Leilao l = this.leiloes.get(im);
+        Imovel i = this.imoveis.get(im);
+        l.arrancaLeilao();
+        String idVencedor = l.encerraLeilao();
+        Comprador vencedor = null;
+        if (l.getMaiorLicitacao() >= i.getPrecoMin()) {
+            vencedor = (Comprador)getUtilizador(idVencedor);
+            i.setEstado("Reservado");
+            System.out.println("O Vencedor é " + vencedor.getNome() + " com uma licitação de " + l.getMaiorLicitacao() + "€");
+        }
+        else System.out.println("A maior licitação foi " + l.getMaiorLicitacao() + "€, inferior ao preço mínimo pedido de " + i.getPrecoMin());
+    }
+    
+    public void participaLeilao(String im, double limite, double incrementos, double minutos) throws LeilaoTerminadoException {
+        Leilao l = this.leiloes.get(im);
+        if (l == null) {
+            System.out.println("Não existe leilão para esse imóvel");
+            return;
+        }
+        l.adicionaComprador(this.atualUser, limite, incrementos, minutos);
     }
 }

@@ -11,6 +11,6 @@ public class SemAutorizacaoException extends Exception {
         super(mensagem);
     }
     public String getMensagem() {
-        return "Não tem autorização para inicar sessão!\n";
+        return "Não tem autorização!\n";
     }
 }
