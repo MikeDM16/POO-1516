@@ -347,7 +347,7 @@ public class ImoobiliariaAPP {
         else {
             int imprimidos = 0;
             for (int o = 0; o < lista.size(); o++) {
-                Imovel i = lista.get(imprimidos);
+                Imovel i = lista.get(o);
                 if (imprimidos < 5) {
                     System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
                     System.out.println(i.toString());
@@ -375,7 +375,7 @@ public class ImoobiliariaAPP {
         else {
             int imprimidos = 0;
             for (int o = 0; o < lista.size(); o++) {
-                Habitavel h = lista.get(imprimidos);
+                Habitavel h = lista.get(o);
                 Imovel i = (Imovel)h;
                 if (imprimidos < 5) {
                     System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
