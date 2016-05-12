@@ -358,6 +358,7 @@ public class ImoobiliariaAPP {
                     String SorN = input.next();
                     if (SorN.equals("N")) break;
                     imprimidos = 0;
+                    o--;
                 }
             }
             System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
@@ -387,6 +388,7 @@ public class ImoobiliariaAPP {
                     String SorN = input.next();
                     if (SorN.equals("N")) break;
                     imprimidos = 0;
+                    o--;
                 }
             }
             System.out.println("  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
