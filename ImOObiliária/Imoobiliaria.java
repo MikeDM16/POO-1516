@@ -8,9 +8,9 @@ import static java.util.stream.Collectors.joining;
 
 public class Imoobiliaria implements Serializable {
     // variáveis de instância
-    private Map<String, Utilizador> utilizadores;         /* Chave == email */
-    private Map<String, Imovel> imoveis;                  /* Chave == referência */
-    private Map<String, Leilao> leiloes;
+    private Map<String, Utilizador> utilizadores;         // Chave == email
+    private Map<String, Imovel> imoveis;                  // Chave == referência do imóvel
+    private Map<String, Leilao> leiloes;                  // Chave == referência do imóvel
     
     private String atualUser;
     private boolean online;
@@ -112,8 +112,9 @@ public class Imoobiliaria implements Serializable {
      * Função que inicia a sessao de um utilizador (o email que recebe é válido)
      */
     public void iniciaSessao(String email, String password) throws SemAutorizacaoException {
+        if (password == null) throw new SemAutorizacaoException();
         Utilizador aux = getUtilizadores().get(email);
-        if (!aux.getPass().equals(password)) throw new SemAutorizacaoException();
+        if (!aux.getPassword().equals(password)) throw new SemAutorizacaoException();
         else {
             this.atualUser = email;
             this.online = true;
@@ -141,19 +142,19 @@ public class Imoobiliaria implements Serializable {
         System.out.println(utilizador.getNome() + ", " + utilizador.getClass().getName() + " registado com sucesso!");
     }
     
-    public void registarImovel(Imovel im) throws ImovelExisteException, SemAutorizacaoException {
+    public void registaImovel(Imovel im) throws ImovelExisteException, SemAutorizacaoException {
         if (!this.temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
         if (this.existeImovel(im)) throw new ImovelExisteException();
-        this.imoveis.put(im.getReferencia(), im);
+        this.imoveis.put(im.getId(), im);
         Vendedor atual = (Vendedor)this.utilizadores.get(this.atualUser); 
-        atual.adicionaImovelVenda(im.getReferencia());
+        atual.adicionaImovelVenda(im.getId());
         this.count++;
-        System.out.println(im.getProprietario() + " registou com sucesso o/a " + im.getClass().getName() + ", com a referência " + im.getReferencia());
+        System.out.println(im.getProprietario() + " registou com sucesso o/a " + im.getClass().getName() + ", com a referência " + im.getId());
     }
     
-    public List<Consulta> getConsultasAtual() {
+    public List<Consulta> getConsultas() {
         Vendedor v = (Vendedor)this.utilizadores.get(atualUser);
-        return v.getConsultas();
+        return v.getConsultasVend();
     }
     
     public List<Imovel> getImovel(String classe, int preco) throws ClassNotFoundException {
@@ -162,12 +163,12 @@ public class Imoobiliaria implements Serializable {
             Imovel aux = i.getValue();
             if (Class.forName(classe).isInstance(aux) && aux.getPrecoPedido() <= preco) {
                 nova.add(aux.clone());
-                if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getReferencia());
+                if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getId());
             }
         }
         return nova;
     }
-    
+        
     public Set<String> getTopImoveis(int n) {
         Vendedor v = (Vendedor)this.utilizadores.get(atualUser);
         return v.getPortf().stream().filter(ref -> this.getNConsultas(ref) >= n).collect(Collectors.toSet());
@@ -179,7 +180,7 @@ public class Imoobiliaria implements Serializable {
             Imovel aux = i.getValue();
             if ((aux instanceof Habitavel) && (aux.getPrecoPedido() <= preco)) {
                 lista.add((Habitavel)aux.clone());
-                if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getReferencia());
+                if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getId());
             }
         }
         return lista;
@@ -189,7 +190,7 @@ public class Imoobiliaria implements Serializable {
         Map<Imovel, Vendedor> novo = new TreeMap<Imovel, Vendedor>(new ComparatorImovelRef());
         for (Map.Entry<String, Imovel> i: this.imoveis.entrySet()) {
             Imovel aux = (Imovel)i.getValue().clone();
-            if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getReferencia());
+            if (aux.getEstado().equals("Em venda")) this.registarConsulta(aux.getId());
             Vendedor v = (Vendedor)getUtilizador(aux.getProprietario()).clone();
             novo.put(aux, v);
         }
@@ -216,6 +217,7 @@ public class Imoobiliaria implements Serializable {
         StringBuilder sb = new StringBuilder("--- Imóveis ---\n");
         sb.append(this.imoveis.values().stream().map(Imovel::toString).collect(joining("\n")));
         sb.append(this.utilizadores.values().stream().map(Utilizador::toString).collect(joining("\n")));
+        sb.append(this.leiloes.values().stream().map(Leilao::toString).collect(joining("\n")));
         sb.append(this.count);
         return sb.toString();
     }
@@ -245,8 +247,9 @@ public class Imoobiliaria implements Serializable {
     
     public void adicionaLeilao(String im, int horas) throws SemAutorizacaoException {
         if (!temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
-        Leilao novo = new Leilao();
         Imovel i = imoveis.get(im);
+        if (i.getProprietario().equals(this.atualUser)) throw new SemAutorizacaoException();
+        Leilao novo = new Leilao();
         novo.iniciaLeilao(i, horas);
         this.leiloes.put(im, novo);
     }

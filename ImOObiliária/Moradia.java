@@ -40,7 +40,7 @@ public class Moradia extends Imovel implements Habitavel {
         this.nQuartos = m.nQuartos;
         this.nWC = m.nWC;
         this.nPorta = m.nPorta;
-        this.setReferencia(m.getReferencia());
+        this.setReferencia(m.getId());
     }
     
     /**
@@ -107,7 +107,7 @@ public class Moradia extends Imovel implements Habitavel {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("\t\tMORADIA\n");
-        s.append("Referência: "                 + this.getReferencia() + "\n");
+        s.append("Referência: "                 + this.getId() + "\n");
         s.append("Estado: "                     + this.getEstado() + "\n");
         s.append("Rua: "                        + this.getRua() + "\n");
         s.append("Preço pedido: "               + this.getPrecoPedido() + "\n");

@@ -70,21 +70,21 @@ public class ImoobiliariaAPP {
             Comprador c4 = new Comprador("Nira Fernandes", "nira@email.com", "nira", "Avenida de Brasil, N.º7", "18-07-1970");
             nova.registarUtilizador(c4);
             Moradia m1 = new Moradia(nova.getCount(), admin.getEmail(), "Avenida da Quinta dos Outeiros", 100000, 90000, "Banda", 300, 200, 100, 3, 4, 15);
-            nova.registarImovel(m1);
+            nova.registaImovel(m1);
             Moradia m2 = new Moradia(nova.getCount(), admin.getEmail(), "Rua da Igreja", 10000, 9500, "Isolada", 300, 200, 100, 3, 4, 11);
-            nova.registarImovel(m2);
+            nova.registaImovel(m2);
             Apartamento a1 = new Apartamento(nova.getCount(), admin.getEmail(), "Rua Nova de Santa Cruz", 50000, 45000, "Simples", 200, 17, "2E", 2, 1, true);
-            nova.registarImovel(a1);
+            nova.registaImovel(a1);
             Apartamento a2 = new Apartamento(nova.getCount(), admin.getEmail(), "Rua dos Batatas", 57000, 55000, "Duplex", 300, 18, "4D", 4, 3, true);
-            nova.registarImovel(a2);
+            nova.registaImovel(a2);
             Loja l1 = new Loja(nova.getCount(), admin.getEmail(), "Rua dos Vasos", 15000, 14000, true, 45, 450, "Restauração");
-            nova.registarImovel(l1);
+            nova.registaImovel(l1);
             Loja l2 = new Loja(nova.getCount(), admin.getEmail(), "Rua das Bananas", 25000, 23000, false, 69, 350, "Lavandaria");
-            nova.registarImovel(l2);
+            nova.registaImovel(l2);
             LojaHabitavel lh1 = new LojaHabitavel(nova.getCount(), admin.getEmail(), "Rua Nova de Santa Cruz", 25000, 23000, false, 69, 350, "Lavandaria", a1);
-            nova.registarImovel(lh1);
+            nova.registaImovel(lh1);
             Terreno t1 = new Terreno(nova.getCount(), admin.getEmail(), "Rua dos Mecos", 50000, 49000, "Armazéns", 150, 16, true, true, 2);
-            nova.registarImovel(t1);
+            nova.registaImovel(t1);
         }
         catch(UtilizadorExistenteException e) {
             System.out.println(e.getMensagem());
@@ -402,7 +402,7 @@ public class ImoobiliariaAPP {
             for (Map.Entry<Imovel, Vendedor> i: mapeamento.entrySet()) {
                 Imovel aux = i.getKey();
                 Vendedor v = i.getValue();
-                System.out.println(aux.getReferencia() + "\t\t" + v.getNome() + "\t\t\t" + v.getEmail()); 
+                System.out.println(aux.getId() + "\t\t" + v.getNome() + "\t\t\t" + v.getEmail()); 
             }
         }
     }
@@ -474,7 +474,7 @@ public class ImoobiliariaAPP {
         if (favoritos.size() == 0) System.out.println("Não existem imóveis para mostrar");
         else {
             System.out.println("Referência \tTipo do Imóvel \t\tPreço"); 
-            for (Imovel i: favoritos) System.out.println(i.getReferencia() + "\t\t" + i.getClass().getName() + "\t\t\t" + i.getPrecoPedido());
+            for (Imovel i: favoritos) System.out.println(i.getId() + "\t\t" + i.getClass().getName() + "\t\t\t" + i.getPrecoPedido());
         }
     }
     
@@ -598,7 +598,7 @@ public class ImoobiliariaAPP {
     
     public static void getConsultasIO() throws SemAutorizacaoException {
         if (!atual.temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
-        List<Consulta> lista = atual.getConsultasAtual();
+        List<Consulta> lista = atual.getConsultas();
         if (lista.size() == 0) {
             System.out.println("Não existem consultas registadas");
             return;
@@ -683,7 +683,7 @@ public class ImoobiliariaAPP {
                 novo = registoTerrenoIO(rua, precoPedido, precoMin);
                 break;
         }
-        atual.registarImovel(novo);
+        atual.registaImovel(novo);
     }
     
     /**

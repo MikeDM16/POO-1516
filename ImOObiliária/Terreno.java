@@ -36,7 +36,7 @@ public class Terreno extends Imovel {
         this.redeEletr = t.getRede();
         this.esgoto = t.getEsgoto();
         this.lote = t.lote;
-        this.setReferencia(t.getReferencia());
+        this.setReferencia(t.getId());
     }
     
     /**
@@ -93,7 +93,7 @@ public class Terreno extends Imovel {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("\t\tTERRENO\n");
-        s.append("Referência: "                 + this.getReferencia() + "\n");
+        s.append("Referência: "                 + this.getId() + "\n");
         s.append("Estado: "                     + this.getEstado() + "\n");
         s.append("Rua: "                        + this.getRua() + "\n");
         s.append("Preço pedido: "               + this.getPrecoPedido() + "\n");

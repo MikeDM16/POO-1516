@@ -49,7 +49,7 @@ public abstract class Imovel implements Serializable {
     public float getPrecoMin() {
         return this.precoMin;
     }
-    public String getReferencia() {
+    public String getId() {
         return this.ref;
     }
     public int getConsultas() {

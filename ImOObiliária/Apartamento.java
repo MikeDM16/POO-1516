@@ -40,7 +40,7 @@ public class Apartamento extends Imovel implements Habitavel {
         this.quartos = a.quartos;
         this.wc = a.wc;
         this.garagem = a.garagem;
-        this.setReferencia(a.getReferencia());
+        this.setReferencia(a.getId());
     }
     
     /**
@@ -107,7 +107,7 @@ public class Apartamento extends Imovel implements Habitavel {
     public String toString () {
         StringBuilder s = new StringBuilder();
         s.append("\t\tAPARTAMENTO\n");
-        s.append("Referência: "                 + this.getReferencia() + "\n");
+        s.append("Referência: "                 + this.getId() + "\n");
         s.append("Estado: "                     + this.getEstado() + "\n");
         s.append("Rua: "                        + this.getRua() + "\n");
         s.append("Preço pedido: "               + this.getPrecoPedido() + "\n");

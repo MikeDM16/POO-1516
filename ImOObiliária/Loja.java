@@ -30,7 +30,7 @@ public class Loja extends Imovel {
         this.numPorta = l.numPorta;
         this.area = l.area;
         this.tipoNeg = l.tipoNeg;
-        this.setReferencia(l.getReferencia());
+        this.setReferencia(l.getId());
     }
     
     /**
@@ -78,7 +78,7 @@ public class Loja extends Imovel {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("\t\tLOJA\n");
-        s.append("Referência: "         + this.getReferencia() + "\n");
+        s.append("Referência: "         + this.getId() + "\n");
         s.append("Estado: "             + this.getEstado() + "\n");
         s.append("Rua: "                + this.getRua() + "\n");
         s.append("Preço pedido: "       + this.getPrecoPedido() + "\n");

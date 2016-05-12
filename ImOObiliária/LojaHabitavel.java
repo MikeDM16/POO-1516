@@ -17,7 +17,7 @@ public class LojaHabitavel extends Loja implements Habitavel {
     public LojaHabitavel(LojaHabitavel l){ 
         super(l);
         this.p = l.p;
-        this.setReferencia(l.getReferencia());
+        this.setReferencia(l.getId());
     }
     
     /**
@@ -43,7 +43,7 @@ public class LojaHabitavel extends Loja implements Habitavel {
     }
     
     public String toString() {
-        StringBuilder s = new StringBuilder("Parte habitável da Loja " + this.getReferencia() + ":\n");
+        StringBuilder s = new StringBuilder("Parte habitável da Loja " + this.getId() + ":\n");
         s.append(this.p.toString());
         return s.toString();
     }

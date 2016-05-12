@@ -32,7 +32,7 @@ public class Vendedor extends Utilizador {
         super(v);
         this.portfolio = v.getPortf();
         this.historico = v.getHist();
-        this.consultas = v.getConsultas();
+        this.consultas = v.getConsultasVend();
     }
     
     /**
@@ -48,7 +48,7 @@ public class Vendedor extends Utilizador {
         for (String r: this.historico) copia.add(r);
         return copia;
     }
-    public List<Consulta> getConsultas() {
+    public List<Consulta> getConsultasVend() {
         List<Consulta> copia = new ArrayList<>();
         for (Consulta i: this.consultas) copia.add(i);
         return copia;

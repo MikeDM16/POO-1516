@@ -58,7 +58,7 @@ public class Leilao implements Serializable {
     public void iniciaLeilao(Imovel im, int horas) throws SemAutorizacaoException {
         GregorianCalendar agora = new GregorianCalendar();
         this.horas = horas;
-        this.referencia = im.getReferencia();
+        this.referencia = im.getId();
         this.maiorLicitacao = 0;
     }
     
