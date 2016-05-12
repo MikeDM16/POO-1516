@@ -582,9 +582,9 @@ public class ImoobiliariaAPP {
     
     public static void criaLeilaoIO() throws SemAutorizacaoException {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
-        System.out.print("-- Insira a referência do imóvel que pretende leiloar");
+        System.out.print("-- Insira a referência do imóvel que pretende leiloar: ");
         String idImovel = input.next();
-        System.out.print("-- Insira o número de horas em que o leilão estará aberto");
+        System.out.print("-- Insira o número de horas em que o leilão estará aberto: ");
         int horas = input.nextInt();
         atual.adicionaLeilao(idImovel, horas);
     }
