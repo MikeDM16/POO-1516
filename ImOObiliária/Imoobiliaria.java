@@ -248,7 +248,7 @@ public class Imoobiliaria implements Serializable {
     public void adicionaLeilao(String im, int horas) throws SemAutorizacaoException {
         if (!temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
         Imovel i = imoveis.get(im);
-        if (i.getProprietario().equals(this.atualUser)) throw new SemAutorizacaoException();
+        if (!i.getProprietario().equals(this.atualUser)) throw new SemAutorizacaoException();
         Leilao novo = new Leilao();
         novo.iniciaLeilao(i, horas);
         this.leiloes.put(im, novo);
@@ -256,6 +256,10 @@ public class Imoobiliaria implements Serializable {
     
     public void arrancaLeilaoAux(String im) throws LeilaoTerminadoException {
         Leilao l = this.leiloes.get(im);
+        if (l.getLicitadores().size() == 0) {
+            System.out.println("Não existem licitadores!");
+            return;
+        }
         Imovel i = this.imoveis.get(im);
         l.arrancaLeilao();
         String idVencedor = l.encerraLeilao();

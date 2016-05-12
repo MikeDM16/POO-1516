@@ -70,7 +70,6 @@ public class Leilao implements Serializable {
     }
     
     public void arrancaLeilao() throws LeilaoTerminadoException {
-        if (this.licitadores.size() == 0) System.out.println("Não existem licitadores neste leilão");
         GregorianCalendar agora = new GregorianCalendar();
         long a = agora.getTimeInMillis() + this.horas * 60 * 1000;
         this.encerramento = new GregorianCalendar();
