@@ -482,11 +482,15 @@ public class ImoobiliariaAPP {
     
     public static void participaLeilaoIO() throws LeilaoTerminadoException {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
+        Map<String, Leilao> leiloes = atual.getLeiloes();
+        if (leiloes.size() == 0) {
+            System.out.println("Não existem leilões!");
+            return;
+        }
         System.out.println("Existem os seguintes leilões:");
         System.out.println("Referência \t\t Duração");
-        Map<String, Leilao> leiloes = atual.getLeiloes();
         for(Map.Entry<String, Leilao> e: leiloes.entrySet())
-            System.out.println(e.toString());
+            System.out.println(e.getValue().toString());
         System.out.print("-- Insira a referência do imóvel: ");
         String id = input.next();
         System.out.print("-- Insira o limite que pretende gastar: ");

@@ -985,3 +985,111 @@ Comprador@a79a07
 Comprador@b34066
 Vendedor@1f215769
 ----------- LOG - LOG - LOG - LOG - LOG ----------------
+
+----------- LOG - LOG - LOG - LOG - LOG ----------------
+--- Imóveis ---
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		APARTAMENTO
+Referência: Apar-3
+Estado: Em venda
+Rua: Rua dos Batatas
+Preço pedido: 57000.0
+Tipo: Duplex
+Area total :300.0
+Numero de Quartos :4
+Numero de WCs :3
+Numero de porta e Andar: 300.0 4D 
+Garagem: Sim
+
+		LOJA
+Referência: Loj-4
+Estado: Em venda
+Rua: Rua dos Vasos
+Preço pedido: 15000.0
+Área : 450.0 m^2
+Tipo de negócio: Restauração
+Número de porta: 45
+Tipo de negócio: Restauração
+WC: Sim
+
+		LOJA
+Referência: Loj-5
+Estado: Em venda
+Rua: Rua das Bananas
+Preço pedido: 25000.0
+Área : 350.0 m^2
+Tipo de negócio: Lavandaria
+Número de porta: 69
+Tipo de negócio: Lavandaria
+WC: Não
+
+Parte habitável da Loja LojH-6:
+		APARTAMENTO
+Referência: Apar-2
+Estado: Em venda
+Rua: Rua Nova de Santa Cruz
+Preço pedido: 50000.0
+Tipo: Simples
+Area total :200.0
+Numero de Quartos :2
+Numero de WCs :1
+Numero de porta e Andar: 200.0 2E 
+Garagem: Sim
+
+		MORADIA
+Referência: Mor-0
+Estado: Em venda
+Rua: Avenida da Quinta dos Outeiros
+Preço pedido: 100000.0
+Tipo: Banda
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 15
+
+		MORADIA
+Referência: Mor-1
+Estado: Em venda
+Rua: Rua da Igreja
+Preço pedido: 10000.0
+Tipo: Isolada
+Area de implantação: 300.0 m^2
+Área total coberta 200.0 m^2
+Área do terreno envolvente 100.0 m^2
+Número de quartos: 3
+Número de WC's: 4
+Número de porta: 11
+
+		TERRENO
+Referência: Terr-7
+Estado: Em venda
+Rua: Rua dos Mecos
+Preço pedido: 50000.0
+Propósito da construção: Armazéns
+Diâmetro do canal: 150.0
+Valor de kWh máximo: 16
+Rede elétrica: Sim
+Acesso à rede de esgotos: Sim
+Vendedor@1ed69c7
+Comprador@20e5ec
+Vendedor@e3eb99
+Vendedor@411e22
+Comprador@48007f
+Vendedor@14b6656
+Comprador@ad369f
+Comprador@644402
+Vendedor@d497cd8
+----------- LOG - LOG - LOG - LOG - LOG ----------------
