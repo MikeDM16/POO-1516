@@ -47,16 +47,14 @@ public class Licitador implements Serializable {
             ultLicitacao = agora;
             return 0;
         }
-        if (this.licitacao + this.incrementos < licitacaoMaior) { // Tenho que incrementar várias vezes para atingir o vencedor
-            int fatorMult = (int)((licitacaoMaior - this.licitacao) % this.incrementos);
-            if (fatorMult == 0) fatorMult = (int)((licitacaoMaior - this.licitacao) / this.incrementos);
-            else fatorMult = (int)((licitacaoMaior - this.licitacao) / this.incrementos) + 1;
-            int novaLicit = (int)(fatorMult * this.incrementos + this.licitacao);
-            if (novaLicit > this.limite) {
-                this.licitacao = this.limite;
-                return 0;
+        if (this.licitacao + this.incrementos <= licitacaoMaior) { // Tenho que incrementar várias vezes para atingir o vencedor
+            while (this.licitacao <= licitacaoMaior) {
+                if (this.licitacao + this.incrementos < this.limite) this.licitacao += this.incrementos;
+                else {
+                    this.licitacao = this.limite;
+                    return 0;
+                }
             }
-            else this.licitacao = novaLicit;
             ultLicitacao = agora;
         }
         else { // Licitação normal

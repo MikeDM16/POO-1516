@@ -249,6 +249,7 @@ public class Imoobiliaria implements Serializable {
         if (!temAutorizacao("Vendedor")) throw new SemAutorizacaoException();
         Imovel i = imoveis.get(im);
         if (!i.getProprietario().equals(this.atualUser)) throw new SemAutorizacaoException();
+        if (!i.getEstado().equals("Em venda")) throw new SemAutorizacaoException();
         Leilao novo = new Leilao();
         novo.iniciaLeilao(i, horas);
         this.leiloes.put(im, novo);

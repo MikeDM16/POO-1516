@@ -497,7 +497,7 @@ public class ImoobiliariaAPP {
         double limite = input.nextDouble();
         System.out.print("-- Insira o valor dos incrementos: ");
         double incrementos = input.nextDouble();
-        System.out.print("-- Insira o intervalo de tempo entre incrementos: ");
+        System.out.print("-- Insira o intervalo de tempo entre incrementos (em seg): ");
         double minutos = input.nextDouble();
         atual.participaLeilao(id, limite, incrementos, minutos);
     }
@@ -590,7 +590,7 @@ public class ImoobiliariaAPP {
         Scanner input = new Scanner(System.in).useDelimiter("\\n");
         System.out.print("-- Insira a referência do imóvel que pretende leiloar: ");
         String idImovel = input.next();
-        System.out.print("-- Insira o número de horas em que o leilão estará aberto: ");
+        System.out.print("-- Insira o número de minutos em que o leilão estará aberto: ");
         int horas = input.nextInt();
         atual.adicionaLeilao(idImovel, horas);
     }
