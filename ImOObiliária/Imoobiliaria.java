@@ -270,7 +270,7 @@ public class Imoobiliaria implements Serializable {
             i.setEstado("Reservado");
             System.out.println("O Vencedor é " + vencedor.getNome() + " com uma licitação de " + l.getMaiorLicitacao() + "€");
         }
-        else System.out.println("A maior licitação foi " + l.getMaiorLicitacao() + "€, inferior ao preço mínimo pedido de " + i.getPrecoMin());
+        else System.out.println("A maior licitação foi " + l.getMaiorLicitacao() + "€, inferior ao preço mínimo pedido");
     }
     
     public void participaLeilao(String im, double limite, double incrementos, double minutos) throws LeilaoTerminadoException {
